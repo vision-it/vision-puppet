@@ -1,0 +1,13 @@
+# Warning: This file is managed by puppet; DO NOT EDIT
+# ====================================================
+# Path:          templates/puppet/puppet4.conf.erb
+# Last Modified: Fri, 29.01.2016 - 09:01:38
+[main]
+syslogfacility = local6
+runinterval = <%= @interval %>
+
+[agent]
+server = <%= @puppet_server %>
+lastrunfile = <%= @last_run_file %>
+user = root
+group = root

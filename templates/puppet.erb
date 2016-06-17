@@ -1,0 +1,14 @@
+# Warning: This file is managed by puppet; DO NOT EDIT
+# ====================================================
+# Path:          templates/system/logrotate/puppet.erb
+# Last Modified: Fri, 29.01.2016 - 08:50:24
+#
+/var/log/puppetlabs/puppet/agent.log {
+    missingok
+    notifempty
+    sharedscripts
+    compress
+    postrotate
+      /usr/bin/systemctl restart puppet >/dev/null 2>&1 || true
+    endscript
+}

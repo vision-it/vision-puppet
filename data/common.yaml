@@ -1,3 +1,5 @@
 ---
-
-
+vision_puppet::client::interval: '1h'
+vision_puppet::client::role: "%{hiera('role')}"
+vision_puppet::puppetdb::sql_database: 'localhost'
+vision_puppet::puppetdb::listen_address: '0.0.0.0'

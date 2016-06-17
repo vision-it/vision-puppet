@@ -1,0 +1,6 @@
+---
+vision_puppet::client::puppet_server: 'locahost'
+vision_puppet::r10k::user: 'foobar'
+vision_puppet::r10k::password: 'foobar'
+vision_puppet::puppetdb::sql_user: 'foobar'
+vision_puppet::puppetdb::sql_password: 'foobar'
