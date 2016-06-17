@@ -1,0 +1,22 @@
+---
+language: ruby
+
+# cache the bundle betweens builds
+cache: bundler
+
+before_install:
+  - rm Gemfile.lock || true
+  - gem install bundler
+  - bundle -v
+
+script:
+  - bundle install
+  - bundle exec rake
+
+matrix:
+    include:
+        - rvm: 2.1.5
+          env: PUPPET_VERSION="4.3"
+          services: docker
+          sudo: required
+

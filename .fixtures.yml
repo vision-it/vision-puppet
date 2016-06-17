@@ -1,0 +1,8 @@
+---
+fixtures:
+    repositories:
+        stblib:
+            ref: "4.12.0"
+            repo: "https://github.com/puppetlabs/puppetlabs-stdlib"
+    symlinks:
+        PROFILE_NAME: '#{source_dir}'

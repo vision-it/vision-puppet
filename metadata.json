@@ -1,0 +1,9 @@
+{
+	"name": "PROFILE_NAME",
+	"version": "0.1.0",
+	"author": "nce",
+	"data_provider": "hiera",
+	"source": "",
+	"license": "",
+	"dependencies": []
+}
