@@ -8,7 +8,8 @@
 #
 # @param puppet_server Name of puppet master
 # @param interval Interval of puppet run
-# @param role Role of this node
+# @param role Role of this nod
+# @param log_file Logfile of puppet agent
 #
 # Examples
 # --------
@@ -19,8 +20,9 @@
 
 class vision_puppet::client (
 
-  String $puppet_server,
   String $interval,
+  String $log_file,
+  String $puppet_server,
   String $role,
 
 ) {
@@ -29,15 +31,13 @@ class vision_puppet::client (
     hasrestart => true,
   }
 
-  file { '/etc/default/puppet/':
+  file { '/etc/default/puppet':
     ensure  => present,
-    content => template('vision_puppet/puppet-cl-args.erb'),
+    owner   => root,
+    group   => root,
+    mode    => '0644',
+    content => template('vision_puppet/puppet-args.conf.erb'),
     notify  => Service['puppet'],
-  }
-
-  file { '/etc/logrotate.d/puppet':
-    ensure  => present,
-    content => template('vision_puppet/puppet.erb'),
   }
 
   if $role != 'puppetserver' {
@@ -46,9 +46,14 @@ class vision_puppet::client (
       owner   => root,
       group   => root,
       mode    => '0744',
-      content => template('vision_puppet/puppet4.conf.erb'),
+      content => template('vision_puppet/puppet.conf.erb'),
       notify  => Service['puppet'],
     }
+  }
+
+  file { '/etc/logrotate.d/puppet':
+    ensure => present,
+    source => 'puppet:///modules/vision_puppet/puppet-logrotate',
   }
 
   # We are not using PCP Execution Protocol (PXP)
