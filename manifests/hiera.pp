@@ -10,7 +10,7 @@
 # --------
 #
 # @example
-# contain ::vision_puppet::client
+# contain ::vision_puppet::hiera
 #
 
 class vision_puppet::hiera (
