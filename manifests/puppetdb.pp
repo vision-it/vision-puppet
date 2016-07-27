@@ -17,7 +17,7 @@
 
 class vision_puppet::puppetdb (
 
-  Array $cert_whitelist = [$::servername],
+  Array $cert_whitelist = [ $::servername ],
   String $listen_address,
   String $sql_database,
   String $sql_password,
@@ -25,17 +25,21 @@ class vision_puppet::puppetdb (
 
 ) {
 
+  $cert_path = '/etc/puppetlabs/puppetdb/ssl'
+  $cert_file = "${cert_path}/ca.pem"
+
+  file { [  '/etc/puppetlabs/puppetdb', $cert_path ]:
+    ensure => 'directory',
+  }->
   exec { 'vision.crt':
     refreshonly => true,
-    command     => '/bin/cp /vision/pki/VisionCA.crt /etc/puppetlabs/puppetdb/ssl/ca.pem',
-  }
-
-  file { '/etc/puppetlabs/puppetdb/ssl/ca.pem':
-    ensure  => present,
-    owner   => puppetdb,
-    group   => puppetdb,
-    mode    => '0600',
-    require => Exec['vision.crt'],
+    command     => "/bin/cp /vision/pki/VisionCA.crt ${cert_file}",
+  }->
+  file { $cert_file:
+    ensure => present,
+    owner  => puppetdb,
+    group  => puppetdb,
+    mode   => '0600',
   }
 
   # Configure the Puppet Master to use puppetdb.
