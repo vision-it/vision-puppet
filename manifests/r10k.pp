@@ -37,6 +37,10 @@ class vision_puppet::r10k(
     require         => Class['::r10k::webhook::config'],
   }
 
+  file { '/etc/puppetlabs/r10k':
+    ensure => 'directory',
+  }
+
   file { '/etc/puppetlabs/r10k/postrun.rb':
     ensure  => present,
     owner   => root,
