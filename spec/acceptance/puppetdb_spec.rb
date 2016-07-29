@@ -10,7 +10,7 @@ describe 'vision_puppet::puppetdb' do
          cert_whitelist => ['localhost'],
          sql_user       => 'foobar',
          sql_password   => 'foobar',
-         sql_database   => 'beaker',
+         sql_host       => 'beaker',
         }
       EOS
 
