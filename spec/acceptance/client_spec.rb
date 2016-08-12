@@ -28,6 +28,7 @@ describe 'vision_puppet::client' do
     describe file('/etc/puppetlabs/puppet/puppet.conf') do
       it { should be_file }
       it { should be_mode 744 }
+      it { should contain 'lastrunfile = /opt/puppetlabs/puppet/last_run_summary.yaml' }
       it { should contain 'This file is managed by puppet' }
     end
 
