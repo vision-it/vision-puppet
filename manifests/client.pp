@@ -24,7 +24,6 @@ class vision_puppet::client (
   String $log_file,
   String $puppet_server,
   String $role,
-  String $last_run_file,
 
 ) {
 

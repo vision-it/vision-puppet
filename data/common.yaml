@@ -2,6 +2,5 @@
 vision_puppet::client::interval: '1h'
 vision_puppet::client::role: "%{hiera('role')}"
 vision_puppet::client::log_file: '/var/log/puppetlabs/puppet/agent.log'
-vision_puppet::client::last_run_file: '/opt/puppetlabs/puppet/last_run_summary.yaml'
 vision_puppet::puppetdb::sql_host: 'localhost'
 vision_puppet::puppetdb::listen_address: '0.0.0.0'
