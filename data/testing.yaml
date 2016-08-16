@@ -4,5 +4,3 @@ vision_puppet::r10k::user: 'foobar'
 vision_puppet::r10k::password: 'foobar'
 vision_puppet::puppetdb::sql_user: 'foobar'
 vision_puppet::puppetdb::sql_password: 'foobar'
-vision_puppet::puppetsql::sql_user: "%{hiera('vision_puppet::puppetdb::sql_user')}"
-vision_puppet::puppetsql::sql_password: "%{hiera('vision_puppet::puppetdb::sql_password')}"

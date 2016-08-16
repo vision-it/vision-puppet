@@ -5,3 +5,5 @@ vision_puppet::client::log_file: '/var/log/puppetlabs/puppet/agent.log'
 vision_puppet::puppetdb::sql_host: 'localhost'
 vision_puppet::puppetdb::listen_address: '0.0.0.0'
 vision_puppet::puppetsql::listen_address: '0.0.0.0'
+vision_puppet::puppetsql::sql_user: "%{hiera('vision_puppet::puppetdb::sql_user')}"
+vision_puppet::puppetsql::sql_password: "%{hiera('vision_puppet::puppetdb::sql_password')}"
