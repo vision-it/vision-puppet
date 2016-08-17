@@ -14,6 +14,12 @@ Default: 'localhost'.
 ##### String `vision_puppet::puppetdb::listen_address`
 Default: '0.0.0.0'
 
+### r10k
+##### String `vision_puppet::r10k::user`
+No default. The User who is running the r10k webhook.
+##### String `vision_puppet::r10k::password`
+No default. 
+
 ## Usage
 Include of the Puppetdb in the Dev environment
 ```puppet
