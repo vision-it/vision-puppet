@@ -4,12 +4,26 @@
 
 ## Parameters
 
-### `vision_puppet::puppetdb`
-##### `vision_puppet::puppetdb::sql_user`
-##### `vision_puppet::puppetdb::sql_password`
-
+### Puppetdb
+##### String `vision_puppet::puppetdb::sql_user`
+No default.
+##### String `vision_puppet::puppetdb::sql_password`
+No default.
+##### String `vision_puppet::puppetdb::sql_host`
+Default: 'localhost'.
+##### String `vision_puppet::puppetdb::listen_address`
+Default: '0.0.0.0'
 
 ## Usage
+Include of the Puppetdb in the Dev environment
+```puppet
+class { '::vision_puppet::puppetdb':
+  sql_user     => 'puppetdb',
+  sql_password => 'puppetdb'
+}
+```
+
+## Installation
 
 Include in the *Puppetfile*:
 
