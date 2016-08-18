@@ -38,6 +38,7 @@ describe 'vision_puppet::server' do
                     }}
 
         it { is_expected.to contain_class('vision_puppet::puppetdb') }
+        it { is_expected.to contain_class('vision_puppet::puppetsql') }
         it { is_expected.to compile.with_all_deps }
 
       end

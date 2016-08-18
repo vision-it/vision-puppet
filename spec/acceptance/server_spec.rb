@@ -6,12 +6,17 @@ describe 'vision_puppet::server' do
     it 'should idempotently run' do
       pp = <<-EOS
 
-        class vision_puppet::beaker_test () {}
+        class vision_puppet::puppetsql (
+         String $sql_user,
+         String $sql_password,
+        ) {}
+        class vision_puppet::puppetdb (
+         String $sql_user,
+         String $sql_password,
+         String $sql_host,
+        ) {}
 
         class { 'vision_puppet::server':
-         pdb_class  => 'vision_puppet::beaker_test',
-         pdb_port   => 8081,
-         pdb_server => 'localhost',
          location   => 'vrt',
          version    => '2.4.0-1puppetlabs1',
         }

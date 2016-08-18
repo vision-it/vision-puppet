@@ -16,9 +16,9 @@
 
 class vision_puppet::server (
 
-  Optional[String] $pdb_class = '::vision_puppet::puppetdb',
   Optional[Integer] $pdb_port = undef,
   Optional[String] $pdb_server = undef,
+
   String $location = $::location,
   String $version,
 
@@ -39,24 +39,32 @@ class vision_puppet::server (
     require => File['/etc/puppetlabs/puppetserver/services.d/'],
   }
 
-  # In VM Puppetserver/PuppetDB/SQL get bundled
-  # In Production they are separate
-
+  # Virtual Puppetserver/PuppetDB/SQL get bundled, in productio they are separate
   if $location == 'vrt' {
 
-    contain $pdb_class
+    class { '::vision_puppet::puppetsql':
+      sql_user     => 'puppetdb',
+      sql_password => 'puppetdb',
+    }
+
+    class { '::vision_puppet::puppetdb':
+      sql_user     => 'puppetdb',
+      sql_password => 'puppetdb',
+      sql_host     => 'localhost',
+      require      => Class['::vision_puppet::puppetsql'],
+    }
 
     } else {
 
       if $pdb_server == undef {
         fail('PuppetDB not defined')
-      } else {
+        } else {
 
-        class { '::puppetdb::master::config':
-          puppetdb_server => $pdb_server,
-          puppetdb_port   => $pdb_port,
+          class { '::puppetdb::master::config':
+            puppetdb_server => $pdb_server,
+            puppetdb_port   => $pdb_port,
+          }
         }
-      }
     }
 
 }
