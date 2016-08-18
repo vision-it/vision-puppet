@@ -21,11 +21,17 @@ No default. The User who is running the r10k webhook.
 No default. 
 
 ## Usage
-Include of the Puppetdb in the Dev environment
+Use of the Puppetdb in the Dev environment
 ```puppet
+class { '::vision_puppet::puppetsql':
+  sql_user     => 'puppetdb',
+  sql_password => 'puppetdb',
+}
 class { '::vision_puppet::puppetdb':
   sql_user     => 'puppetdb',
-  sql_password => 'puppetdb'
+  sql_password => 'puppetdb',
+  sql_host     => 'localhost',
+  require      => Class['::vision_puppet::puppetsql'],
 }
 ```
 
