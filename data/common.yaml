@@ -1,4 +1,5 @@
 ---
+vision_puppet::server::pdb_port: 8081
 vision_puppet::client::interval: '1h'
 vision_puppet::client::role: "%{hiera('role')}"
 vision_puppet::client::log_file: '/var/log/puppetlabs/puppet/agent.log'
