@@ -8,11 +8,22 @@ describe 'vision_puppet::server' do
         facts
       end
 
+      context 'raise error' do
+
+        let(:params) {{
+                      :location => 'int'
+                    }}
+
+        it { should compile.and_raise_error(/PuppetDB not defined/) }
+
+      end
+
 
       context 'compile' do
 
         let(:params) {{
-                      :location => 'int'
+                        :location => 'int',
+                        :pdb_server => 'localhost'
                     }}
 
         it { is_expected.to contain_class('puppetdb::master::config') }
