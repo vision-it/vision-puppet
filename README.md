@@ -4,7 +4,15 @@
 
 ## Parameters
 
-### Puppetdb
+### Puppet Server
+##### String `vision_puppet::server:version`
+No default. (Example: '2.4.0-1puppetlabs1)
+
+### Puppet Agent
+##### String `vision_puppet::client:puppet_server`
+No default.
+
+### PuppetDB
 ##### String `vision_puppet::puppetdb::sql_user`
 No default.
 ##### String `vision_puppet::puppetdb::sql_password`
@@ -18,7 +26,7 @@ Default: '0.0.0.0'
 ##### String `vision_puppet::r10k::user`
 No default. The User who is running the r10k webhook.
 ##### String `vision_puppet::r10k::password`
-No default. 
+No default.
 
 ## Usage
 Use of the Puppetdb in the Dev environment
