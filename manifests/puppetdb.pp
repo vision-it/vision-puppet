@@ -36,10 +36,11 @@ class vision_puppet::puppetdb (
     command     => "/bin/cp /vision/pki/VisionCA.crt ${cert_file}",
   }->
   file { $cert_file:
-    ensure => present,
-    owner  => puppetdb,
-    group  => puppetdb,
-    mode   => '0600',
+    ensure  => present,
+    owner   => puppetdb,
+    group   => puppetdb,
+    mode    => '0600',
+    require => Package['puppetdb'],
   }
 
   # Configure the Puppet Master to use puppetdb.
