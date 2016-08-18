@@ -49,14 +49,14 @@ class vision_puppet::server (
     } else {
 
       if $pdb_server == undef {
-        fail('PuppetDB not defined (puppet::puppetdb::host and puppet::puppetdb::port)')
-      }
+        fail('PuppetDB not defined')
+      } else {
 
-      class { '::puppetdb::master::config':
-        puppetdb_server => $pdb_server,
-        puppetdb_port   => $pdb_port,
+        class { '::puppetdb::master::config':
+          puppetdb_server => $pdb_server,
+          puppetdb_port   => $pdb_port,
+        }
       }
-
     }
 
 }
