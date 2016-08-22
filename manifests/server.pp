@@ -16,11 +16,11 @@
 
 class vision_puppet::server (
 
-  Optional[Integer] $pdb_port = undef,
-  Optional[String] $pdb_server = undef,
-
   String $location = $::location,
   String $version,
+
+  Optional[Integer] $pdb_port = undef,
+  Optional[String] $pdb_server = undef,
 
 ) {
 
