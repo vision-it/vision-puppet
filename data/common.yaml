@@ -8,3 +8,4 @@ vision_puppet::puppetdb::listen_address: '0.0.0.0'
 vision_puppet::puppetsql::listen_address: '0.0.0.0'
 vision_puppet::puppetsql::sql_user: "%{hiera('vision_puppet::puppetdb::sql_user')}"
 vision_puppet::puppetsql::sql_password: "%{hiera('vision_puppet::puppetdb::sql_password')}"
+vision_puppet::puppetsql::manage_repo: false
