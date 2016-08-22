@@ -18,7 +18,7 @@ class vision_puppet::puppetsql (
   String $listen_address,
   String $sql_password,
   String $sql_user,
-  Boolean $manage_repo,
+  Optional[Boolean] $manage_repo = false,
 
 ) {
 
