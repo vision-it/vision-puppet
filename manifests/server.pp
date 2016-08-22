@@ -16,8 +16,8 @@
 
 class vision_puppet::server (
 
-  String $location = $::location,
   String $version,
+  String $location = $::location,
 
   Optional[Integer] $pdb_port = undef,
   Optional[String] $pdb_server = undef,

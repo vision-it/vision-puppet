@@ -17,11 +17,11 @@
 
 class vision_puppet::puppetdb (
 
-  Array $cert_whitelist = [],
   String $listen_address,
   String $sql_host,
   String $sql_password,
   String $sql_user,
+  Array $cert_whitelist = [],
 
 ) {
 
