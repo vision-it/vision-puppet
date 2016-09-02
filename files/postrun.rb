@@ -3,6 +3,12 @@
 require 'yaml'
 
 location = `/opt/puppetlabs/bin/facter location`.chomp
+threads = Array.new
+
+def cloneModule(moduleName, environment, moduleOptions)
+  puts "Deploying module #{moduleName} from #{moduleOptions['url']}"
+  system("/usr/bin/git clone #{moduleOptions['url']} --branch #{moduleOptions['ref']} --single-branch /etc/puppetlabs/code/environments/#{environment}/dist/#{moduleName}")
+end
 
 Dir.entries('/etc/puppetlabs/code/environments').each do |environment|
   next if environment == '.' || environment == '..'
@@ -26,8 +32,7 @@ Dir.entries('/etc/puppetlabs/code/environments').each do |environment|
         puts "Deploying module #{moduleName} from /opt/puppet/modules/#{moduleName}"
         system("ln -sf /opt/puppet/modules/#{moduleName} /etc/puppetlabs/code/environments/#{environment}/dist/")
       else
-        puts "Deploying module #{moduleName} from #{options['url']}"
-        system("/usr/bin/git clone #{options['url']} --branch #{options['ref']} --single-branch /etc/puppetlabs/code/environments/#{environment}/dist/#{moduleName}")
+        threads.push Thread.new{cloneModule(moduleName, environment, options)}
       end
     end
 
@@ -36,8 +41,9 @@ Dir.entries('/etc/puppetlabs/code/environments').each do |environment|
     system("ln -sf /opt/puppet/hiera /etc/puppetlabs/code/hieradata/#{environment}")
   else
     modules.each do |moduleName, options|
-      puts "Deploying module #{moduleName} from #{options['url']}"
-      system("/usr/bin/git clone #{options['url']} --branch #{options['ref']} --single-branch /etc/puppetlabs/code/environments/#{environment}/dist/#{moduleName}")
+      threads.push Thread.new{cloneModule(moduleName, environment, options)}
     end
   end
 end
+
+threads.each { |t| t.join }
