@@ -10,6 +10,8 @@
 # @param interval Interval of puppet run
 # @param role Role of this nod
 # @param log_file Logfile of puppet agent
+# @param pin Enables or Disables APT Pinning of Puppet Agent package
+# @param pin_version The version to be APT pinned
 #
 # Examples
 # --------
@@ -24,6 +26,8 @@ class vision_puppet::client (
   String $log_file,
   String $puppet_server,
   String $role,
+  Optional[Boolean] $pin,
+  Optional[String] $pin_version,
 
 ) {
 
@@ -63,6 +67,20 @@ class vision_puppet::client (
 
   file { '/etc/logrotate.d/pxp-agent':
     ensure => absent,
+  }
+
+  # If requested, enable pining of puppet agent
+  if $pin {
+    file { '/etc/apt/preferences.d/puppet-agent':
+      ensure  => present,
+      owner   => root,
+      group   => root,
+      content => "# This file is managed by Puppet; DO NOT EDIT
+      Package: puppet-agent
+      Pin: version $pin_version
+      Pin-Priority: 1000
+      "
+    }
   }
 
 }
