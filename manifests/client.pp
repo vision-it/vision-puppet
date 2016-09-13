@@ -10,8 +10,9 @@
 # @param interval Interval of puppet run
 # @param role Role of this nod
 # @param log_file Logfile of puppet agent
-# @param pin Enables or Disables APT Pinning of Puppet Agent package
-# @param pin_version The version to be APT pinned
+# @param pin enables or disables APT Pinning of Puppet Agent package
+# @param pin_version version to be APT pinned
+# @param pin_priotity priority of pinned Puppet Agent package
 #
 # Examples
 # --------
@@ -26,8 +27,9 @@ class vision_puppet::client (
   String $log_file,
   String $puppet_server,
   String $role,
-  Optional[Boolean] $pin,
-  Optional[String] $pin_version,
+  Optional[Boolean] $pin = undef,
+  Optional[String] $pin_version = undef,
+  Optional[Integer] $pin_priority = undef,
 
 ) {
 
@@ -77,8 +79,8 @@ class vision_puppet::client (
       group   => root,
       content => "# This file is managed by Puppet; DO NOT EDIT
       Package: puppet-agent
-      Pin: version $pin_version
-      Pin-Priority: 1000
+      Pin: version ${pin_version}
+      Pin-Priority: ${pin_priority}
       "
     }
   }
