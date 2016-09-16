@@ -9,6 +9,9 @@ describe 'vision_puppet::client' do
          puppet_server => 'localhost',
          role          => 'beaker',
          log_file      => '/var/log/puppetlabs/puppet/agent.log',
+         pin           => true,
+         pin_version   => '1.2.3-abc',
+         pin_priority  => 999,
         }
       EOS
 
@@ -34,6 +37,13 @@ describe 'vision_puppet::client' do
 
     describe file('/etc/logrotate.d/puppet') do
       it { should be_file }
+    end
+
+    describe file('/etc/apt/preferences.d/puppet-agent') do
+      it { should be_file }
+      it { should contain 'Package: puppet-agent' }
+      it { should contain 'Pin: version 1.2.3' }
+      it { should contain 'Pin-Priority: 999' }
     end
   end
 
