@@ -1,13 +1,18 @@
 #!/usr/bin/ruby
 
 require 'yaml'
+require 'open3'
 
 location = `/opt/puppetlabs/bin/facter location`.chomp
 threads = Array.new
+$errors = []
 
 def cloneModule(moduleName, environment, moduleOptions)
   puts "Deploying module #{moduleName} from #{moduleOptions['url']}"
-  system("/usr/bin/git clone #{moduleOptions['url']} --branch #{moduleOptions['ref']} --single-branch /etc/puppetlabs/code/environments/#{environment}/dist/#{moduleName}")
+  stdout, stderr, status = Open3.capture3("/usr/bin/git clone #{moduleOptions['url']} --branch #{moduleOptions['ref']} --single-branch /etc/puppetlabs/code/environments/#{environment}/dist/#{moduleName}")
+  if stderr.include? 'fatal'
+    $errors.push(stderr)
+  end
 end
 
 Dir.entries('/etc/puppetlabs/code/environments').each do |environment|
@@ -47,3 +52,4 @@ Dir.entries('/etc/puppetlabs/code/environments').each do |environment|
 end
 
 threads.each { |t| t.join }
+$errors.each {|error| $stderr.puts error}
