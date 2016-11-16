@@ -41,6 +41,16 @@ class vision_puppet::r10k(
     ensure => 'directory',
   }
 
+  # New
+  vcsrepo { '/etc/puppetlabs/r10k/postrun':
+    ensure   => latest,
+    provider => git,
+    source   => 'https://github.com/vision-it/postrun.git',
+    require  => Class['::r10k::webhook::config'],
+    revision => 'master',
+  }
+
+  # Legacy
   file { '/etc/puppetlabs/r10k/postrun.rb':
     ensure  => present,
     owner   => root,
