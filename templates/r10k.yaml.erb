@@ -6,8 +6,8 @@
   hiera:
     basedir: /etc/puppetlabs/code/hieradata
     prefix: false
-    remote: <%= @remote_path_puppet %>
+    remote: <%= @remote_path_hiera %>
   puppet:
     basedir: /etc/puppetlabs/code/environments
     prefix: false
-    remote: <%= @remote_path_hiera %>
+    remote: <%= @remote_path_puppet %>
