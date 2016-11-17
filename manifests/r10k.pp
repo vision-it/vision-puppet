@@ -20,6 +20,8 @@ class vision_puppet::r10k(
 
   String $user,
   String $password,
+  String $remote_path_hiera,
+  String $remote_path_puppet,
 
 ) {
 
@@ -41,11 +43,11 @@ class vision_puppet::r10k(
     ensure => 'directory',
   }->
   file { '/etc/puppetlabs/r10k/r10k.yaml':
-    ensure => present,
-    owner  => root,
-    group  => root,
-    mode   => '0644',
-    source => 'puppet:///modules/vision_puppet/r10k.yaml',
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    mode    => '0644',
+    content => template('vision_puppet/r10k.yaml.erb'),
   }->
   package { 'python3-yaml':
     ensure => 'present',

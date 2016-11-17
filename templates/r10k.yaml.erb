@@ -1,13 +1,13 @@
 # Warning: This file is managed by puppet
 ---
-:postrun: ["/etc/puppetlabs/r10k/postrun.rb"]
+:postrun: ['/etc/puppetlabs/r10k/postrun.rb']
 :cachedir: /opt/puppetlabs/puppet/cache/r10k
 :sources:
   hiera:
     basedir: /etc/puppetlabs/code/hieradata
     prefix: false
-    remote: /opt/puppet/hiera
+    remote: <%= @remote_path_puppet %>
   puppet:
     basedir: /etc/puppetlabs/code/environments
     prefix: false
-    remote: /opt/puppet/control
+    remote: <%= @remote_path_hiera %>

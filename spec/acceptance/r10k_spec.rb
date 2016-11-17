@@ -8,6 +8,8 @@ describe 'vision_puppet::r10k' do
         class { 'vision_puppet::r10k':
          user     => 'foobar',
          password => 'foobar',
+         remote_path_hiera  => 'hiera_path_foobar',
+         remote_path_puppet => 'puppet_path_foobar',
         }
       EOS
 
@@ -27,6 +29,8 @@ describe 'vision_puppet::r10k' do
       it { should be_file }
       it { should be_mode 644 }
       its(:content) { should match 'This file is managed by puppet' }
+      its(:content) { should match 'puppet_path_foobar' }
+      its(:content) { should match 'hiera_path_foobar' }
     end
 
     describe file('/etc/puppetlabs/r10k/postrun.rb') do

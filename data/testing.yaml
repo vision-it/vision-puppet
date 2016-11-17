@@ -5,5 +5,7 @@ vision_puppet::client::pin: true
 vision_puppet::client::pin_version: '1.6.*'
 vision_puppet::r10k::user: 'foobar'
 vision_puppet::r10k::password: 'foobar'
+vision_puppet::r10k::remote_path_hiera: 'foobar'
+vision_puppet::r10k::remote_path_puppet: 'foobar'
 vision_puppet::puppetdb::sql_user: 'foobar'
 vision_puppet::puppetdb::sql_password: 'foobar'
