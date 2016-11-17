@@ -16,7 +16,19 @@ describe 'vision_puppet::r10k' do
     end
   end
 
+  context 'package installed' do
+    describe package('python3-yaml') do
+      it { should be_installed}
+    end
+  end
+
   context 'files provisioned' do
+    describe file('/etc/puppetlabs/r10k/r10k.yaml') do
+      it { should be_file }
+      it { should be_mode 644 }
+      its(:content) { should match 'This file is managed by puppet' }
+    end
+
     describe file('/etc/puppetlabs/r10k/postrun.rb') do
       it { should be_file }
       it { should be_mode 755 }

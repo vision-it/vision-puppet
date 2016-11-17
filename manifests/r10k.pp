@@ -39,9 +39,19 @@ class vision_puppet::r10k(
 
   file { '/etc/puppetlabs/r10k':
     ensure => 'directory',
+  }->
+  file { '/etc/puppetlabs/r10k/r10k.yaml':
+    ensure => present,
+    owner  => root,
+    group  => root,
+    mode   => '0644',
+    source => 'puppet:///modules/vision_puppet/r10k.yaml',
+  }->
+  package { 'python3-yaml':
+    ensure => 'present',
   }
 
-  # New
+    # New
   vcsrepo { '/etc/puppetlabs/r10k/postrun':
     ensure   => latest,
     provider => git,
