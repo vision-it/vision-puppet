@@ -78,10 +78,10 @@ class vision_puppet::client (
       owner   => root,
       group   => root,
       content => "# This file is managed by Puppet; DO NOT EDIT
-      Package: puppet-agent
-      Pin: version ${pin_version}
-      Pin-Priority: ${pin_priority}
-      "
+Package: puppet-agent
+Pin: version ${pin_version}
+Pin-Priority: ${pin_priority}
+"
     }
   }
 
