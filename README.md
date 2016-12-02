@@ -11,6 +11,19 @@ No default. (Example: '2.4.0-1puppetlabs1)
 ### Puppet Agent
 ##### String `vision_puppet::client:puppet_server`
 No default.
+##### String `vision_puppet::client:interval`
+Interval for Puppet Agent runs - default '6h'
+##### String `vision_puppet::client:log_file`
+Destination of logs for (background) Puppet Agent runs
+##### String `vision_puppet::client:role`
+Role of this node (required for checking if this is a Puppet Server or not)
+##### Optional[Boolean] `vision_puppet::client:pin`
+Enables Pinning of Puppet Agent version in apt. Defaults to false.
+##### Optional[String] `vision_puppet::client:pin_version`
+Sets the pinned version in apt
+##### Optional[Integer] `vision_puppet::client:pin_priority`
+Sets the pinning priority in apt. Defaults to 1000.
+
 
 ### PuppetDB
 ##### String `vision_puppet::puppetdb::sql_user`
@@ -58,4 +71,3 @@ Include in a role/profile:
 ```puppet
 contain ::vision_puppet::puppetdb
 ```
-
