@@ -1,6 +1,7 @@
 ---
 vision_puppet::server::version: '2.4.0-1puppetlabs1'
 vision_puppet::client::puppet_server: 'localhost'
+vision_puppet::client::role: 'testing'
 vision_puppet::client::pin: true
 vision_puppet::client::pin_version: '1.6.*'
 vision_puppet::r10k::user: 'foobar'
