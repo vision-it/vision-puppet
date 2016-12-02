@@ -8,7 +8,7 @@
 #
 # @param puppet_server Name of puppet master
 # @param interval Interval of puppet run
-# @param role Role of this nod
+# @param role Role of this node
 # @param log_file Logfile of puppet agent
 # @param pin enables or disables APT Pinning of Puppet Agent package
 # @param pin_version version to be APT pinned
@@ -26,7 +26,7 @@ class vision_puppet::client (
   String $interval,
   String $log_file,
   String $puppet_server,
-  String $role,
+  String $role = hiera('role'),
   Optional[Boolean] $pin = undef,
   Optional[String] $pin_version = undef,
   Optional[Integer] $pin_priority = undef,
