@@ -34,6 +34,13 @@ describe 'vision_puppet::server' do
     end
   end
 
+  context 'cronjob installed' do
+    describe file('/etc/cron.d/puppetserver-delete-reports') do
+      it { should be_file }
+      it { should contain '# Warning: This file is managed by puppet' }
+      it { should contain 'reports' }
+    end
+  end
 
   context 'files provisioned' do
     describe file('/etc/puppetlabs/puppetserver/services.d/ca.cfg') do

@@ -22,6 +22,8 @@ class vision_puppet::server (
   Optional[Integer] $pdb_port = undef,
   Optional[String] $pdb_server = undef,
 
+  Optional[Integer] report_days = 30,
+
 ) {
 
   package { 'puppetserver':
@@ -37,6 +39,14 @@ class vision_puppet::server (
     ensure  => present,
     source  => 'puppet:///modules/vision_puppet/ca.cfg',
     require => File['/etc/puppetlabs/puppetserver/services.d/'],
+  }
+
+  file { '/etc/cron.d/puppetserver-delete-old-reports':
+    ensure  => present,
+    content => "# Warning: This file is managed by puppet;
+    31 1 * * root /usr/bin/find /opt/puppetlabs/server/data/puppetserver/reports/ -mtime ${report_days} -type f -delete
+    ",
+    mode    => '0740',
   }
 
   # Virtual Puppetserver/PuppetDB/SQL get bundled, in productio they are separate
