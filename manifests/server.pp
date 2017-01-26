@@ -22,7 +22,7 @@ class vision_puppet::server (
   Optional[Integer] $pdb_port = undef,
   Optional[String] $pdb_server = undef,
 
-  Optional[Integer] report_days = 30,
+  Optional[Integer] $report_days = 30,
 
 ) {
 
