@@ -41,7 +41,7 @@ class vision_puppet::server (
     require => File['/etc/puppetlabs/puppetserver/services.d/'],
   }
 
-  file { '/etc/cron.d/puppetserver-delete-old-reports':
+  file { '/etc/cron.d/puppetserver-delete-reports':
     ensure  => present,
     content => "# Warning: This file is managed by puppet;
     31 1 * * root /usr/bin/find /opt/puppetlabs/server/data/puppetserver/reports/ -mtime ${report_days} -type f -delete

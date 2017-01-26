@@ -7,6 +7,14 @@
 ### Puppet Server
 ##### String `vision_puppet::server:version`
 No default. (Example: '2.4.0-1puppetlabs1)
+##### String `vision_puppet::server::location`
+Defaults to `$::location`
+##### Optional[Integer] `vision_puppet::server::pdb_port`
+Port of PuppetDB server (optional, no default)
+##### Optional[String] `vision_puppet::server::pdb_server`
+Address of PuppetDB server (optional, no default)
+##### Optional[Integer] `vision_puppet::server::report_days`
+Delete reports older than x days by installing a cronjob. Defaults to 30.
 
 ### Puppet Agent
 ##### String `vision_puppet::client:puppet_server`
