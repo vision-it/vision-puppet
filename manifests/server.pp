@@ -17,17 +17,28 @@
 class vision_puppet::server (
 
   String $version,
-  String $location = $::location,
-
-  Optional[Integer] $pdb_port = undef,
-  Optional[String] $pdb_server = undef,
-
+  Integer $pin_priority,
+  String $location               = $::location,
+  Optional[Integer] $pdb_port    = undef,
+  Optional[String] $pdb_server   = undef,
   Optional[Integer] $report_days = 30,
 
 ) {
 
   package { 'puppetserver':
-    ensure => $version,
+    ensure => present,
+    require => File['/etc/apt/preferences.d/puppetserver'],
+  }
+
+  file { '/etc/apt/preferences.d/puppetserver':
+    ensure  => present,
+    owner   => root,
+    group   => root,
+        content => "# This file is managed by Puppet; DO NOT EDIT
+    Package: puppetserver
+    Pin: version ${version}
+    Pin-Priority: ${pin_priority}
+    "
   }
 
   file { '/etc/puppetlabs/puppetserver/services.d/':
