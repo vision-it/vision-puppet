@@ -17,8 +17,9 @@ describe 'vision_puppet::server' do
         ) {}
 
         class { 'vision_puppet::server':
-         location   => 'vrt',
-         version    => '2.4.0-1puppetlabs1',
+         location     => 'vrt',
+         version      => '2.4.0-1puppetlabs1',
+         pin_priority => 999,
         }
       EOS
 
@@ -48,6 +49,13 @@ describe 'vision_puppet::server' do
       it { should contain 'This file is managed by puppet' }
       its(:content) { should match (/puppetlabs.services.ca.certificate-authority-disabled-service/) }
       its(:content) { should match (/# puppetlabs.services.ca.certificate-authority-service/) }
+    end
+
+    describe file('/etc/apt/preferences.d/puppetserver') do
+      it { should be_file }
+      it { should contain 'Package: puppetserver' }
+      it { should contain 'Pin: version 2.4.0-1puppetlabs1' }
+      it { should contain 'Pin-Priority: 999' }
     end
   end
 

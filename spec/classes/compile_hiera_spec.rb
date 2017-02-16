@@ -5,7 +5,10 @@ describe 'vision_puppet::hiera' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts
+        facts.merge({
+          :is_pe => false,
+          :pe_server_version => false
+        })
       end
 
       context 'compile' do

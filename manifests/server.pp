@@ -26,7 +26,7 @@ class vision_puppet::server (
 ) {
 
   package { 'puppetserver':
-    ensure => present,
+    ensure  => present,
     require => File['/etc/apt/preferences.d/puppetserver'],
   }
 
@@ -34,11 +34,11 @@ class vision_puppet::server (
     ensure  => present,
     owner   => root,
     group   => root,
-        content => "# This file is managed by Puppet; DO NOT EDIT
-    Package: puppetserver
-    Pin: version ${version}
-    Pin-Priority: ${pin_priority}
-    "
+    content => "# This file is managed by Puppet; DO NOT EDIT
+Package: puppetserver
+Pin: version ${version}
+Pin-Priority: ${pin_priority}
+"
   }
 
   file { '/etc/puppetlabs/puppetserver/services.d/':
@@ -75,17 +75,17 @@ class vision_puppet::server (
       require      => Class['::vision_puppet::puppetsql'],
     }
 
+  } else {
+
+    if $pdb_server == undef {
+      fail('PuppetDB not defined')
     } else {
 
-      if $pdb_server == undef {
-        fail('PuppetDB not defined')
-        } else {
-
-          class { '::puppetdb::master::config':
-            puppetdb_server => $pdb_server,
-            puppetdb_port   => $pdb_port,
-          }
-        }
+      class { '::puppetdb::master::config':
+        puppetdb_server => $pdb_server,
+        puppetdb_port   => $pdb_port,
+      }
     }
+  }
 
 }
