@@ -1,0 +1,12 @@
+# Warning: This file is managed by puppet; DO NOT EDIT
+# ====================================================
+
+[main]
+syslogfacility = local6
+runinterval = <%= @interval %>
+
+[agent]
+server = <%= @puppet_server %>
+lastrunfile = /opt/puppetlabs/puppet/last_run_summary.yaml
+user = root
+group = root

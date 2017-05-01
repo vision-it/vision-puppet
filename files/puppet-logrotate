@@ -1,0 +1,12 @@
+# Warning: This file is managed by puppet; DO NOT EDIT
+# ====================================================
+
+/var/log/puppetlabs/puppet/agent.log {
+    missingok
+    notifempty
+    sharedscripts
+    compress
+    postrotate
+      /usr/bin/systemctl restart puppet >/dev/null 2>&1 || true
+    endscript
+}
