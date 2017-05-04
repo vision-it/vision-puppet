@@ -4,6 +4,9 @@ describe 'vision_puppet::hiera' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-EOS
+
+        user { 'puppet': ensure => present }
+
         class { 'vision_puppet::hiera':
         }
       EOS
