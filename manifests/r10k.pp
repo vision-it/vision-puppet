@@ -25,6 +25,10 @@ class vision_puppet::r10k(
 
 ) {
 
+  class { 'vision_puppet::r10k_packages':
+    before => Class['::r10k::webhook::config']
+  }
+
   class { '::r10k::webhook::config':
     use_mcollective => false,
     enable_ssl      => false,
@@ -34,6 +38,7 @@ class vision_puppet::r10k(
 
   class { '::r10k::webhook':
     use_mcollective => false,
+    manage_packages => false,
     user            => root,
     group           => 0,
     require         => Class['::r10k::webhook::config'],
@@ -49,17 +54,16 @@ class vision_puppet::r10k(
     mode    => '0644',
     content => template('vision_puppet/r10k.yaml.erb'),
   }
-  -> package { 'python3-yaml':
+
+  package { 'python3-yaml':
     ensure => 'present',
   }
-
-    # New
-  vcsrepo { '/etc/puppetlabs/r10k/postrun':
+  -> vcsrepo { '/etc/puppetlabs/r10k/postrun':
     ensure   => latest,
     provider => git,
     source   => 'https://github.com/vision-it/postrun.git',
-    require  => Class['::r10k::webhook::config'],
     revision => 'master',
+    require  => Class['::r10k::webhook::config'],
   }
 
 }

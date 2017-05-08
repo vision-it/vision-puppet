@@ -2,53 +2,56 @@
 fixtures:
     repositories:
         stdlib:
-          ref: "4.12.0"
+          ref: "4.16.0"
           repo: "https://github.com/puppetlabs/puppetlabs-stdlib"
+
+        # Hiera
         hiera:
           ref: "2.0.1"
           repo: "https://github.com/voxpupuli/puppet-hiera"
-        inifile:
+        inifile: # dependency for hiera
           ref: "1.5.0"
           repo: "https://github.com/puppetlabs/puppetlabs-inifile"
-        r10k:
-          ref: "v3.2.0"
-          repo: "https://github.com/acidprime/r10k"
+
+        # PuppetDB
         puppetdb:
           ref: "5.1.2"
           repo: "http://github.com/puppetlabs/puppetlabs-puppetdb"
-        firewall:
+        firewall: # dependency for puppetdb
           ref: "1.8.1"
           repo: "https://github.com/puppetlabs/puppetlabs-firewall"
-        postgresql:
+        postgresql: # dependency for puppetdb
           ref: "4.8.0"
           repo: "https://github.com/puppetlabs/puppetlabs-postgresql"
-        gcc:
-          ref: "0.3.0"
-          repo: "https://github.com/puppetlabs/puppetlabs-gcc"
-        git:
-          ref: "0.5.0"
-          repo: "https://github.com/puppetlabs/puppetlabs-git"
-        vcsrepo:
-          ref: "1.3.2"
-          repo: "https://github.com/puppetlabs/puppetlabs-vcsrepo"
-        pe_gem:
-          ref: "0.1.2"
-          repo: "https://github.com/puppetlabs/puppetlabs-pe_gem"
-        ruby:
-          ref: "0.5.0"
-          repo: "https://github.com/puppetlabs/puppetlabs-ruby"
-        concat:
+        concat: # dependency for postgresql
           ref: "2.2.0"
           repo: "https://github.com/puppetlabs/puppetlabs-concat"
-        apt:
+        apt: # dependency for postgresql
           ref: "2.2.2"
           repo: "https://github.com/puppetlabs/puppetlabs-apt"
-        portage:
+
+        # r10k
+        r10k:
+          ref: "v5.0.2"
+          repo: "https://github.com/voxpupuli/puppet-r10k"
+        gcc: # dependency for r10k
+          ref: "0.3.0"
+          repo: "https://github.com/puppetlabs/puppetlabs-gcc"
+        git: # dependency for r10k
+          ref: "0.5.0"
+          repo: "https://github.com/puppetlabs/puppetlabs-git"
+        vcsrepo: # dependency for r10k
+          ref: "1.5.0"
+          repo: "https://github.com/puppetlabs/puppetlabs-vcsrepo"
+        ruby: # dependency for r10k
+          ref: "0.6.0"
+          repo: "https://github.com/puppetlabs/puppetlabs-ruby"
+        portage: # dependency for r10k
           ref: "2.3.0"
           repo: "https://github.com/gentoo/puppet-portage"
-        make:
-          ref: "v0.0.5"
-          repo: "https://github.com/cmroddy/puppet-make"
+        make: # dependency for r10k
+          ref: "v1.1.0"
+          repo: "https://github.com/voxpupuli/puppet-make"
 
     symlinks:
         vision_puppet: '#{source_dir}'

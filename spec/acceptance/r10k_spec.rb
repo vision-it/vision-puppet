@@ -12,9 +12,9 @@ describe 'vision_puppet::r10k' do
         }
       EOS
 
-      # TODO: Fails due to webhook
-      apply_manifest(pp, catch_failures: false)
-      apply_manifest(pp, catch_changes: false)
+      apply_manifest(pp, catch_failures: false) # Service needs another run
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
   end
 
@@ -36,6 +36,12 @@ describe 'vision_puppet::r10k' do
     describe file('/etc/puppetlabs/r10k/postrun/postrun.py') do
       it { is_expected.to be_file }
       it { is_expected.to be_mode 755 }
+    end
+  end
+
+  context 'service running' do
+    describe service('webhook') do
+      it { is_expected.to be_running }
     end
   end
 end
