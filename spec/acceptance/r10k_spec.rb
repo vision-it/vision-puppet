@@ -33,11 +33,6 @@ describe 'vision_puppet::r10k' do
       its(:content) { is_expected.to match 'hiera_path_foobar' }
     end
 
-    describe file('/etc/puppetlabs/r10k/postrun.rb') do
-      it { is_expected.to be_file }
-      it { is_expected.to be_mode 755 }
-    end
-
     describe file('/etc/puppetlabs/r10k/postrun/postrun.py') do
       it { is_expected.to be_file }
       it { is_expected.to be_mode 755 }
