@@ -26,7 +26,8 @@ class vision_puppet::puppetsql (
     database_username   => $sql_user,
     database_password   => $sql_password,
     listen_addresses    => $listen_address,
-    manage_package_repo => $manage_repo
+    manage_package_repo => $manage_repo,
+    postgres_version    => '9.4'
   }
 
 }
