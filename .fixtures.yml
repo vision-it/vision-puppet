@@ -2,7 +2,7 @@
 fixtures:
     repositories:
         stdlib:
-          ref: "4.16.0"
+          ref: "4.18.0"
           repo: "https://github.com/puppetlabs/puppetlabs-stdlib"
 
         # Hiera
@@ -32,7 +32,7 @@ fixtures:
 
         # r10k
         r10k:
-          ref: "v5.0.2"
+          ref: "v6.1.0"
           repo: "https://github.com/voxpupuli/puppet-r10k"
         gcc: # dependency for r10k
           ref: "0.3.0"
@@ -41,10 +41,10 @@ fixtures:
           ref: "0.5.0"
           repo: "https://github.com/puppetlabs/puppetlabs-git"
         vcsrepo: # dependency for r10k
-          ref: "1.5.0"
+          ref: "2.0.0"
           repo: "https://github.com/puppetlabs/puppetlabs-vcsrepo"
         ruby: # dependency for r10k
-          ref: "0.6.0"
+          ref: "1.0.0"
           repo: "https://github.com/puppetlabs/puppetlabs-ruby"
         portage: # dependency for r10k
           ref: "2.3.0"
