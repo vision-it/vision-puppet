@@ -30,6 +30,7 @@ class vision_puppet::server (
     require => File['/etc/apt/preferences.d/puppetserver'],
   }
 
+  # Pinning for Puppetserver Version
   file { '/etc/apt/preferences.d/puppetserver':
     ensure  => present,
     owner   => root,
@@ -48,7 +49,7 @@ Pin-Priority: ${pin_priority}
 
   file { '/etc/puppetlabs/puppetserver/services.d/ca.cfg':
     ensure  => present,
-    source  => 'puppet:///modules/vision_puppet/ca.cfg',
+    content => file('vision_puppet/ca.cfg'),
     require => File['/etc/puppetlabs/puppetserver/services.d/'],
   }
 

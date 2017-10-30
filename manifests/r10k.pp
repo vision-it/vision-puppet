@@ -22,13 +22,27 @@ class vision_puppet::r10k(
   String $password,
   String $remote_path_hiera,
   String $remote_path_puppet,
+  String $provider = 'puppet_gem',
 
 ) {
 
-  class { 'vision_puppet::r10k_packages':
-    before => Class['::r10k::webhook::config']
+  # Pinned cause of Ruby 2.1
+  if !defined(Package['sinatra']) {
+    package { 'sinatra':
+      ensure   => '1.4.8',
+      provider => $provider,
+    }
   }
 
+  # Pinned cause of Ruby 2.1
+  if !defined(Package['rack']) {
+    package { 'rack':
+      ensure   => '1.6.5',
+      provider => $provider,
+    }
+  }
+
+  # Webhook for automated deployment with Git
   class { '::r10k::webhook::config':
     use_mcollective => false,
     enable_ssl      => false,
@@ -44,6 +58,7 @@ class vision_puppet::r10k(
     require         => Class['::r10k::webhook::config'],
   }
 
+  # Deploy r10k Config
   file { '/etc/puppetlabs/r10k':
     ensure => 'directory',
   }
@@ -55,6 +70,7 @@ class vision_puppet::r10k(
     content => template('vision_puppet/r10k.yaml.erb'),
   }
 
+  # Deploy Python Postrun Script to manage Modules
   package { 'python3-yaml':
     ensure => 'present',
   }

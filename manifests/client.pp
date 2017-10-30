@@ -26,9 +26,9 @@ class vision_puppet::client (
   String $interval,
   String $log_file,
   String $puppet_server,
-  String $role = hiera('role'),
-  Optional[Boolean] $pin = undef,
-  Optional[String] $pin_version = undef,
+  String $role                    = hiera('role'),
+  Optional[Boolean] $pin          = undef,
+  Optional[String] $pin_version   = undef,
   Optional[Integer] $pin_priority = undef,
 
 ) {
@@ -58,8 +58,8 @@ class vision_puppet::client (
   }
 
   file { '/etc/logrotate.d/puppet':
-    ensure => present,
-    source => 'puppet:///modules/vision_puppet/puppet-logrotate',
+    ensure  => present,
+    content => file('vision_puppet/puppet-logrotate'),
   }
 
   # We are not using PCP Execution Protocol (PXP)
