@@ -1,0 +1,21 @@
+# hiera.yaml Managed by Puppet
+version: 5
+
+defaults:
+  datadir: /etc/puppetlabs/code/hieradata/%{::environment}
+
+hierarchy:
+  - name: "eYaml Hierarchy"
+    lookup_key: eyaml_lookup_key
+    paths:
+      - "node/%{::clientcert}.yaml"
+      - "location/%{::location}.yaml"
+      - "role/%{role}.yaml" # Comes from hiera not facter
+      - "type/%{::nodetype}.yaml"
+      - "type/common.yaml"
+      - "users.yaml"
+      - "common.yaml"
+    options:
+      pkcs7_private_key: "/etc/puppetlabs/puppet/keys/private_key.pkcs7.pem"
+      pkcs7_public_key: "/etc/puppetlabs/puppet/keys/public_key.pkcs7.pem"
+

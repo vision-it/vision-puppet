@@ -4,11 +4,7 @@ describe 'vision_puppet::hiera' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-EOS
-
-        user { 'puppet': ensure => present }
-
-        class { 'vision_puppet::hiera':
-        }
+        class { 'vision_puppet::hiera': }
       EOS
 
       apply_manifest(pp, catch_failures: true)
@@ -23,8 +19,9 @@ describe 'vision_puppet::hiera' do
 
     describe file('/etc/puppetlabs/puppet/hiera.yaml') do
       it { is_expected.to be_file }
+      it { is_expected.to contain 'pkcs7_private_key' }
+      it { is_expected.to contain 'datadir' }
       it { is_expected.to contain 'location' }
-      it { is_expected.to contain 'tier' }
       it { is_expected.to contain 'role' }
       it { is_expected.to contain 'type' }
       it { is_expected.to contain 'common' }

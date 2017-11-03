@@ -26,7 +26,7 @@ class vision_puppet::client (
   String $interval,
   String $log_file,
   String $puppet_server,
-  String $role                    = hiera('role'),
+  String $role                    = lookup('role', String, 'first', 'default'),
   Optional[Boolean] $pin          = undef,
   Optional[String] $pin_version   = undef,
   Optional[Integer] $pin_priority = undef,
