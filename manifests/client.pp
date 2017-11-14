@@ -26,6 +26,8 @@ class vision_puppet::client (
   String $interval,
   String $log_file,
   String $puppet_server,
+  String $repo_key,
+  String $repo_key_id,
   String $role                    = lookup('role', String, 'first', 'default'),
   Optional[Boolean] $pin          = undef,
   Optional[String] $pin_version   = undef,
@@ -37,8 +39,8 @@ class vision_puppet::client (
     location => 'https://apt.puppetlabs.com',
     repos    => 'main',
     key      => {
-      id     => '6F6B15509CF8E59E6E469F327F438280EF8D349F',
-      server => 'pgp.mit.edu',
+      id      => $repo_key_id,
+      content => $repo_key,
     },
     include  => {
       'src' => false,
