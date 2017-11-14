@@ -31,10 +31,30 @@ class vision_puppet::client (
   Optional[String] $pin_version   = undef,
   Optional[Integer] $pin_priority = undef,
 
-) {
+  ) {
+
+  apt::source { 'puppetlabs':
+    location => 'https://apt.puppetlabs.com',
+    repos    => 'main',
+    key      => {
+      id     => '6F6B15509CF8E59E6E469F327F438280EF8D349F',
+      server => 'pgp.mit.edu',
+    },
+    include  => {
+      'src' => false,
+      'deb' => true,
+    }
+  }
+
+  package { 'puppet-agent':
+    ensure  => present,
+    require => Apt::Source['puppetlabs']
+  }
 
   service { 'puppet':
+    enable     => true,
     hasrestart => true,
+    require    => Package['puppet-agent'],
   }
 
   file { '/etc/default/puppet':

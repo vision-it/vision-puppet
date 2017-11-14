@@ -44,5 +44,14 @@ describe 'vision_puppet::client' do
       it { is_expected.to contain 'Pin: version 1.2.3' }
       it { is_expected.to contain 'Pin-Priority: 999' }
     end
+
+    describe package('puppet-agent') do
+      it { is_expected.to be_installed }
+    end
+
+    describe service('puppet') do
+      it { is_expected.to be_running }
+      it { is_expected.to be_enabled }
+    end
   end
 end
