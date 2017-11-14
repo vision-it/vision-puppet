@@ -44,6 +44,14 @@ class vision_puppet::client (
       'src' => false,
       'deb' => true,
     }
+   }
+
+  if $pin {
+    apt::pin { 'puppet-agent':
+      packages => 'puppet-agent',
+      priority => $pin_priority,
+      version  => $pin_version,
+    }
   }
 
   package { 'puppet-agent':
@@ -89,20 +97,6 @@ class vision_puppet::client (
 
   file { '/etc/logrotate.d/pxp-agent':
     ensure => absent,
-  }
-
-  # If requested, enable pining of puppet agent
-  if $pin {
-    file { '/etc/apt/preferences.d/puppet-agent':
-      ensure  => present,
-      owner   => root,
-      group   => root,
-      content => "# This file is managed by Puppet; DO NOT EDIT
-Package: puppet-agent
-Pin: version ${pin_version}
-Pin-Priority: ${pin_priority}
-"
-    }
   }
 
 }
