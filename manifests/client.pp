@@ -26,15 +26,46 @@ class vision_puppet::client (
   String $interval,
   String $log_file,
   String $puppet_server,
+  String $repo_key,
+  String $repo_key_id,
   String $role                    = lookup('role', String, 'first', 'default'),
   Optional[Boolean] $pin          = undef,
   Optional[String] $pin_version   = undef,
   Optional[Integer] $pin_priority = undef,
 
-) {
+  ) {
+
+  apt::source { 'puppetlabs':
+    location => 'https://apt.puppetlabs.com',
+    repos    => 'main',
+    key      => {
+      id      => $repo_key_id,
+      content => $repo_key,
+    },
+    include  => {
+      'src' => false,
+      'deb' => true,
+    }
+  }
+
+  if $pin {
+    apt::pin { 'puppet-agent':
+      packages => 'puppet-agent',
+      priority => $pin_priority,
+      version  => $pin_version,
+    }
+  }
+
+  package { 'puppet-agent':
+    ensure  => present,
+    require => Apt::Source['puppetlabs']
+  }
 
   service { 'puppet':
+    ensure     => running,
+    enable     => true,
     hasrestart => true,
+    require    => Package['puppet-agent'],
   }
 
   file { '/etc/default/puppet':
@@ -69,20 +100,6 @@ class vision_puppet::client (
 
   file { '/etc/logrotate.d/pxp-agent':
     ensure => absent,
-  }
-
-  # If requested, enable pining of puppet agent
-  if $pin {
-    file { '/etc/apt/preferences.d/puppet-agent':
-      ensure  => present,
-      owner   => root,
-      group   => root,
-      content => "# This file is managed by Puppet; DO NOT EDIT
-Package: puppet-agent
-Pin: version ${pin_version}
-Pin-Priority: ${pin_priority}
-"
-    }
   }
 
 }
