@@ -38,8 +38,9 @@ describe 'vision_puppet::client' do
       it { is_expected.to be_file }
     end
 
-    describe file('/etc/apt/preferences.d/50pin-puppet-agent.pref') do
+    describe file('/etc/apt/preferences.d/puppet-agent.pref') do
       it { is_expected.to be_file }
+      it { is_expected.to contain 'This file is managed by Puppet. DO NOT EDIT.' }
       it { is_expected.to contain 'Package: puppet-agent' }
       it { is_expected.to contain 'Pin: version 1.2.3' }
       it { is_expected.to contain 'Pin-Priority: 999' }
