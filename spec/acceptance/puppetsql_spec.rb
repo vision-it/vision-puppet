@@ -17,9 +17,14 @@ describe 'vision_puppet::puppetsql' do
     end
   end
 
-  context 'package installed' do
+  context 'postgres installed and running' do
     describe package('postgresql-common') do
       it { is_expected.to be_installed }
+    end
+
+    describe service('postgresql') do
+      it { is_expected.to be_running }
+      it { is_expected.to be_enabled }
     end
   end
 end

@@ -18,6 +18,7 @@ class vision_puppet::puppetsql (
   String $listen_address,
   String $sql_password,
   String $sql_user,
+  String $postgresql_version,
   Optional[Boolean] $manage_repo = false,
 
 ) {
@@ -27,7 +28,7 @@ class vision_puppet::puppetsql (
     database_password   => $sql_password,
     listen_addresses    => $listen_address,
     manage_package_repo => $manage_repo,
-    postgres_version    => '9.4'
+    postgres_version    => $postgresql_version,
   }
 
 }

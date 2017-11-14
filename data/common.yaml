@@ -11,6 +11,7 @@ vision_puppet::puppetsql::listen_address: '0.0.0.0'
 vision_puppet::puppetsql::sql_user: "%{hiera('vision_puppet::puppetdb::sql_user')}"
 vision_puppet::puppetsql::sql_password: "%{hiera('vision_puppet::puppetdb::sql_password')}"
 vision_puppet::puppetsql::manage_repo: false
+vision_puppet::puppetsql::postgresql_version: '9.4'
 vision_puppet::client::repo_key_id: '6F6B15509CF8E59E6E469F327F438280EF8D349F'
 vision_puppet::client::repo_key: >-
 -----BEGIN PGP PUBLIC KEY BLOCK-----
