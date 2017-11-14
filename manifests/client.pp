@@ -44,7 +44,7 @@ class vision_puppet::client (
       'src' => false,
       'deb' => true,
     }
-   }
+  }
 
   if $pin {
     apt::pin { 'puppet-agent':
@@ -60,6 +60,7 @@ class vision_puppet::client (
   }
 
   service { 'puppet':
+    ensure     => running,
     enable     => true,
     hasrestart => true,
     require    => Package['puppet-agent'],
