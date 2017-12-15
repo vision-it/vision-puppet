@@ -3,7 +3,7 @@ require 'spec_helper_acceptance'
 describe 'vision_puppet::server' do
   context 'with defaults' do
     it 'idempotentlies run' do
-      pp = <<-EOS
+      pp = <<-FILE
 
         class vision_puppet::puppetsql (
          String $sql_user,
@@ -20,7 +20,7 @@ describe 'vision_puppet::server' do
          version      => '2.4.0-1puppetlabs1',
          pin_priority => 999,
         }
-      EOS
+      FILE
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)

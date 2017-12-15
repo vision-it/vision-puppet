@@ -3,7 +3,7 @@ require 'spec_helper_acceptance'
 describe 'vision_puppet::puppetdb' do
   context 'with defaults' do
     it 'idempotentlies run' do
-      pp = <<-EOS
+      pp = <<-FILE
         class { 'vision_puppet::puppetdb':
          listen_address => '0.0.0.0',
          cert_whitelist => ['localhost'],
@@ -11,7 +11,7 @@ describe 'vision_puppet::puppetdb' do
          sql_password   => 'foobar',
          sql_host       => 'beaker',
         }
-      EOS
+      FILE
 
       # TODO: fails due to ssl configuration of puppetdb, needs fixing
       apply_manifest(pp, catch_failures: false)

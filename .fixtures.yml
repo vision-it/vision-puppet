@@ -23,7 +23,7 @@ fixtures:
           ref: "2.2.0"
           repo: "https://github.com/puppetlabs/puppetlabs-concat"
         apt: # dependency for postgresql
-          ref: "2.2.2"
+          ref: "4.2.0"
           repo: "https://github.com/puppetlabs/puppetlabs-apt"
 
         # r10k

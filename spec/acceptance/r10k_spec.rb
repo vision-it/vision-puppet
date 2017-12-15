@@ -3,14 +3,14 @@ require 'spec_helper_acceptance'
 describe 'vision_puppet::r10k' do
   context 'with defaults' do
     it 'idempotentlies run' do
-      pp = <<-EOS
+      pp = <<-FILE
         class { 'vision_puppet::r10k':
          user     => 'foobar',
          password => 'foobar',
          remote_path_hiera  => 'hiera_path_foobar',
          remote_path_puppet => 'puppet_path_foobar',
         }
-      EOS
+      FILE
 
       apply_manifest(pp, catch_failures: false) # Service needs another run
       apply_manifest(pp, catch_failures: true)

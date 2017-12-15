@@ -3,7 +3,7 @@ require 'spec_helper_acceptance'
 describe 'vision_puppet::client' do
   context 'with defaults' do
     it 'idempotentlies run' do
-      pp = <<-EOS
+      pp = <<-FILE
         class { 'vision_puppet::client':
          puppet_server => 'localhost',
          role          => 'beaker',
@@ -12,7 +12,7 @@ describe 'vision_puppet::client' do
          pin_version   => '1.2.3-abc',
          pin_priority  => 999,
         }
-      EOS
+      FILE
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
