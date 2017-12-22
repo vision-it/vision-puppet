@@ -1,7 +1,7 @@
 # Class: vision_puppet::r10k
 # ===========================
 #
-# Profile to manage R10K
+# Profile to manage r10k, but we're using g10k now
 #
 # Parameters
 # ----------
@@ -18,68 +18,47 @@
 
 class vision_puppet::r10k(
 
-  String $user,
-  String $password,
   String $remote_path_hiera,
   String $remote_path_puppet,
-  String $provider = 'puppet_gem',
+  String $g10k_url      = 'https://github.com/xorpaul/g10k/releases/download/v0.4.4/g10k-linux-amd64.zip',
+  String $g10k_checksum = 'e5a2ec0e6da4d2fd579c93cda97b55c922b56f4b888bba6a2f9b174bd28eeb66',
 
 ) {
 
-  # Pinned cause of Ruby 2.1
-  if !defined(Package['sinatra']) {
-    package { 'sinatra':
-      ensure   => '1.4.8',
-      provider => $provider,
-    }
+  archive { '/tmp/g10k.zip' :
+    ensure        => present,
+    source        => $g10k_url,
+    checksum      => $g10k_checksum,
+    checksum_type => 'sha256',
+    extract_path  => '/opt/puppetlabs/bin',
+    extract       => true,
+    require       => File['/etc/puppetlabs/r10k'],
   }
 
-  # Pinned cause of Ruby 2.1
-  if !defined(Package['rack']) {
-    package { 'rack':
-      ensure   => '1.6.5',
-      provider => $provider,
-    }
-  }
-
-  # Webhook for automated deployment with Git
-  class { '::r10k::webhook::config':
-    use_mcollective => false,
-    enable_ssl      => false,
-    user            => $user,
-    pass            => $password,
-  }
-
-  class { '::r10k::webhook':
-    use_mcollective => false,
-    manage_packages => false,
-    user            => root,
-    group           => 0,
-    require         => Class['::r10k::webhook::config'],
-  }
-
-  # Deploy r10k Config
+  # Deploy Config
   file { '/etc/puppetlabs/r10k':
     ensure => 'directory',
   }
-  -> file { '/etc/puppetlabs/r10k/r10k.yaml':
+
+  file { '/etc/puppetlabs/r10k/g10k.yaml':
     ensure  => present,
     owner   => root,
     group   => root,
     mode    => '0644',
     content => template('vision_puppet/r10k.yaml.erb'),
+    require => File['/etc/puppetlabs/r10k'],
   }
 
-  # Deploy Python Postrun Script to manage Modules
+  # Python Postrun Script to manage Custom Modules in Vagrant
   package { 'python3-yaml':
     ensure => 'present',
   }
-  -> vcsrepo { '/etc/puppetlabs/r10k/postrun':
+
+  vcsrepo { '/etc/puppetlabs/r10k/postrun':
     ensure   => latest,
     provider => git,
     source   => 'https://github.com/vision-it/postrun.git',
-    revision => 'master',
-    require  => Class['::r10k::webhook::config'],
+    revision => 'master'
   }
 
 }

@@ -4,10 +4,15 @@ fixtures:
         stdlib:
           ref: "4.18.0"
           repo: "https://github.com/puppetlabs/puppetlabs-stdlib"
-
-        inifile: # dependency for hiera
+        archive:
+          ref: "v2.2.0"
+          repo: "https://github.com/voxpupuli/puppet-archive"
+        inifile:
           ref: "1.5.0"
           repo: "https://github.com/puppetlabs/puppetlabs-inifile"
+        vcsrepo:
+          ref: "2.2.0"
+          repo: "https://github.com/puppetlabs/puppetlabs-vcsrepo"
 
         # PuppetDB
         puppetdb:
@@ -25,29 +30,6 @@ fixtures:
         apt: # dependency for postgresql
           ref: "4.2.0"
           repo: "https://github.com/puppetlabs/puppetlabs-apt"
-
-        # r10k
-        r10k:
-          ref: "v6.1.0"
-          repo: "https://github.com/voxpupuli/puppet-r10k"
-        gcc: # dependency for r10k
-          ref: "0.3.0"
-          repo: "https://github.com/puppetlabs/puppetlabs-gcc"
-        git: # dependency for r10k
-          ref: "0.5.0"
-          repo: "https://github.com/puppetlabs/puppetlabs-git"
-        vcsrepo: # dependency for r10k
-          ref: "2.0.0"
-          repo: "https://github.com/puppetlabs/puppetlabs-vcsrepo"
-        ruby: # dependency for r10k
-          ref: "1.0.0"
-          repo: "https://github.com/puppetlabs/puppetlabs-ruby"
-        portage: # dependency for r10k
-          ref: "2.3.0"
-          repo: "https://github.com/gentoo/puppet-portage"
-        make: # dependency for r10k
-          ref: "v1.1.0"
-          repo: "https://github.com/voxpupuli/puppet-make"
 
     symlinks:
         vision_puppet: '#{source_dir}'
