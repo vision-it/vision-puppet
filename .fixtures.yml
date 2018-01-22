@@ -13,23 +13,13 @@ fixtures:
         vcsrepo:
           ref: "2.2.0"
           repo: "https://github.com/puppetlabs/puppetlabs-vcsrepo"
-
-        # PuppetDB
-        puppetdb:
-          ref: "6.0.1"
-          repo: "http://github.com/puppetlabs/puppetlabs-puppetdb"
-        firewall: # dependency for puppetdb
-          ref: "1.8.1"
-          repo: "https://github.com/puppetlabs/puppetlabs-firewall"
-        postgresql: # dependency for puppetdb
-          ref: "5.1.0"
-          repo: "https://github.com/puppetlabs/puppetlabs-postgresql"
-        concat: # dependency for postgresql
-          ref: "2.2.0"
-          repo: "https://github.com/puppetlabs/puppetlabs-concat"
-        apt: # dependency for postgresql
+        apt:
           ref: "4.2.0"
           repo: "https://github.com/puppetlabs/puppetlabs-apt"
+        # PuppetDB for config
+        puppetdb:
+          ref: "6.0.2"
+          repo: "http://github.com/puppetlabs/puppetlabs-puppetdb"
 
     symlinks:
         vision_puppet: '#{source_dir}'

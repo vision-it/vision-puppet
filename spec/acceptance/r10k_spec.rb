@@ -4,7 +4,6 @@ describe 'vision_puppet::r10k' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-FILE
-
         package { 'unzip': ensure => 'present' }
 
         class { 'vision_puppet::r10k':

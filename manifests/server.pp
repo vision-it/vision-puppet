@@ -18,10 +18,10 @@ class vision_puppet::server (
 
   String $version,
   Integer $pin_priority,
-  String $location               = $::location,
-  Optional[Integer] $pdb_port    = undef,
-  Optional[String] $pdb_server   = undef,
-  Optional[Integer] $report_days = 30,
+  Integer $pdb_port,
+  String $location             = $::location,
+  Integer $report_days         = 30,
+  Optional[String] $pdb_server = undef
 
 ) {
 
@@ -61,32 +61,11 @@ Pin-Priority: ${pin_priority}
     mode    => '0740',
   }
 
-  # Virtual Puppetserver/PuppetDB/SQL get bundled, in productio they are separate
-  if $location == 'vrt' {
-
-    class { '::vision_puppet::puppetsql':
-      sql_user     => 'puppetdb',
-      sql_password => 'puppetdb',
-    }
-
-    class { '::vision_puppet::puppetdb':
-      sql_user     => 'puppetdb',
-      sql_password => 'puppetdb',
-      sql_host     => 'localhost',
-      require      => Class['::vision_puppet::puppetsql'],
-    }
-
-  } else {
-
-    if $pdb_server == undef {
-      fail('PuppetDB not defined')
-    } else {
-
-      class { '::puppetdb::master::config':
-        puppetdb_server => $pdb_server,
-        puppetdb_port   => $pdb_port,
-      }
+  # Virtual Puppetserver/PuppetDB/SQL get bundled, in production they are separate
+  if $pdb_server != undef {
+    class { '::puppetdb::master::config':
+      puppetdb_server => $pdb_server,
+      puppetdb_port   => $pdb_port,
     }
   }
-
 }

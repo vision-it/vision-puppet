@@ -27,6 +27,7 @@ class vision_puppet::client (
   String $log_file,
   String $puppet_server,
   String $repo_key,
+  String $repo_component,
   String $repo_key_id,
   String $role                    = lookup('role', String, 'first', 'default'),
   Optional[Boolean] $pin          = undef,
@@ -37,7 +38,7 @@ class vision_puppet::client (
 
   apt::source { 'puppetlabs':
     location => 'https://apt.puppetlabs.com',
-    repos    => 'main',
+    repos    => $repo_component,
     key      => {
       id      => $repo_key_id,
       content => $repo_key,

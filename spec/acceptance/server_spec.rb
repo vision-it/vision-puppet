@@ -4,17 +4,6 @@ describe 'vision_puppet::server' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-FILE
-
-        class vision_puppet::puppetsql (
-         String $sql_user,
-         String $sql_password,
-        ) {}
-        class vision_puppet::puppetdb (
-         String $sql_user,
-         String $sql_password,
-         String $sql_host,
-        ) {}
-
         class { 'vision_puppet::server':
          location     => 'vrt',
          version      => '2.4.0-1puppetlabs1',
