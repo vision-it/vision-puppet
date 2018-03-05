@@ -4,9 +4,10 @@ describe 'vision_puppet::masterless' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-FILE
+        package { 'unzip': ensure => 'present' }
+
         class { 'vision_puppet::masterless':
          puppetdb_server => 'http://localhost:8081/',
-         role          => 'beaker',
         }
       FILE
 
@@ -16,7 +17,6 @@ describe 'vision_puppet::masterless' do
   end
 
   context 'files provisioned' do
-
     describe file('/etc/puppetlabs/puppet/puppet.conf') do
       it { is_expected.to be_file }
       it { is_expected.to be_mode 744 }
@@ -55,9 +55,8 @@ describe 'vision_puppet::masterless' do
     end
 
     describe service('puppet') do
-      it { is_expected.to_not be_running }
-      it { is_expected.to_not be_enabled }
+      it { is_expected.not_to be_running }
+      it { is_expected.not_to be_enabled }
     end
-
   end
 end

@@ -4,11 +4,7 @@ describe 'vision_puppet::agent' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-FILE
-        class { 'vision_puppet::agent':
-         pin           => true,
-         pin_version   => '1.2.3-abc',
-         pin_priority  => 999,
-        }
+        class { 'vision_puppet::agent': }
       FILE
 
       apply_manifest(pp, catch_failures: true)

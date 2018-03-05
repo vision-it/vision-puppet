@@ -7,7 +7,6 @@
 class vision_puppet::masterless (
 
   String $puppetdb_server,
-  String $role                    = lookup('role', String, 'first', 'default'),
 
   ) {
 
@@ -20,8 +19,9 @@ class vision_puppet::masterless (
     require => Apt::Source['puppetlabs']
   }
 
-  service { 'puppet-agent':
+  service { 'puppet':
     ensure  => stopped,
+    enable  => false,
     require => Package['puppet-agent'],
   }
 

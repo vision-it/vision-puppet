@@ -4,11 +4,7 @@ describe 'vision_puppet::client' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-FILE
-        class { 'vision_puppet::client':
-         puppet_server => 'localhost',
-         role          => 'beaker',
-         log_file      => '/var/log/puppetlabs/puppet/agent.log',
-        }
+        class { 'vision_puppet::client': }
       FILE
 
       apply_manifest(pp, catch_failures: true)

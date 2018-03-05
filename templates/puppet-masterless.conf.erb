@@ -12,8 +12,5 @@ storeconfigs_backend = puppetdb
 facts_terminus = puppetdb
 
 [main]
-syslogfacility = local6
-runinterval = <%= @interval %>
-basemodulepath = /etc/puppetlabs/puppet/modules:/usr/share/puppet/modules
 environmentpath = /etc/puppetlabs/code/environments
 hiera_config = /etc/puppetlabs/puppet/hiera.yaml

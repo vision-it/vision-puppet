@@ -6,10 +6,7 @@ describe 'vision_puppet::r10k' do
       pp = <<-FILE
         package { 'unzip': ensure => 'present' }
 
-        class { 'vision_puppet::r10k':
-         remote_path_hiera  => 'hiera_path_foobar',
-         remote_path_puppet => 'puppet_path_foobar',
-        }
+        class { 'vision_puppet::r10k': }
       FILE
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
@@ -27,8 +24,8 @@ describe 'vision_puppet::r10k' do
       it { is_expected.to be_file }
       it { is_expected.to be_mode 644 }
       its(:content) { is_expected.to match 'This file is managed by puppet' }
-      its(:content) { is_expected.to match 'puppet_path_foobar' }
-      its(:content) { is_expected.to match 'hiera_path_foobar' }
+      its(:content) { is_expected.to match '/puppet/path/foobar' }
+      its(:content) { is_expected.to match '/hiera/path/foobar' }
       its(:content) { is_expected.to match 'puppetfilelocation' }
     end
 

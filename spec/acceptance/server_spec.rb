@@ -4,11 +4,7 @@ describe 'vision_puppet::server' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-FILE
-        class { 'vision_puppet::server':
-         location     => 'vrt',
-         version      => '2.4.0-1puppetlabs1',
-         pin_priority => 999,
-        }
+        class { 'vision_puppet::server': }
       FILE
 
       apply_manifest(pp, catch_failures: true)
