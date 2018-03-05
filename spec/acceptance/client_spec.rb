@@ -8,9 +8,6 @@ describe 'vision_puppet::client' do
          puppet_server => 'localhost',
          role          => 'beaker',
          log_file      => '/var/log/puppetlabs/puppet/agent.log',
-         pin           => true,
-         pin_version   => '1.2.3-abc',
-         pin_priority  => 999,
         }
       FILE
 

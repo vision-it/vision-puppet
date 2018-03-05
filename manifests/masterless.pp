@@ -7,43 +7,13 @@
 class vision_puppet::masterless (
 
   String $puppetdb_server,
-  String $repo_key,
-  String $repo_key_id,
   String $role                    = lookup('role', String, 'first', 'default'),
-  Optional[Boolean] $pin          = undef,
-  Optional[String] $pin_version   = undef,
-  Optional[Integer] $pin_priority = undef,
 
   ) {
 
   contain ::vision_puppet::r10k
   contain ::vision_puppet::hiera
-
-  apt::source { 'puppetlabs':
-    location => 'https://apt.puppetlabs.com',
-    repos    => 'main',
-    key      => {
-      id      => $repo_key_id,
-      content => $repo_key,
-    },
-    include  => {
-      'src' => false,
-      'deb' => true,
-    }
-  }
-
-  if $pin {
-    apt::pin { 'puppet-agent':
-      packages => 'puppet-agent',
-      priority => $pin_priority,
-      version  => $pin_version,
-    }
-  }
-
-  package { 'puppet-agent':
-    ensure  => present,
-    require => Apt::Source['puppetlabs']
-  }
+  contain ::vision_puppet::agent
 
   package { 'puppetdb-termini':
     ensure  => present,

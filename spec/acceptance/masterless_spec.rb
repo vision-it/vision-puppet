@@ -7,9 +7,6 @@ describe 'vision_puppet::masterless' do
         class { 'vision_puppet::masterless':
          puppetdb_server => 'http://localhost:8081/',
          role          => 'beaker',
-         pin           => true,
-         pin_version   => '1.2.3-abc',
-         pin_priority  => 999,
         }
       FILE
 
