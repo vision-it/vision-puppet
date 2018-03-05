@@ -45,6 +45,16 @@ class vision_puppet::masterless (
     require => Apt::Source['puppetlabs']
   }
 
+  package { 'puppetdb-termini':
+    ensure  => present,
+    require => Apt::Source['puppetlabs']
+  }
+
+  service { 'puppet-agent':
+    ensure  => stopped,
+    require => Package['puppet-agent'],
+  }
+
   file { '/etc/puppetlabs/puppet/puppet.conf':
     ensure  => present,
     owner   => root,
