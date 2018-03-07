@@ -10,9 +10,6 @@
 # @param interval Interval of puppet run
 # @param role Role of this node
 # @param log_file Logfile of puppet agent
-# @param pin enables or disables APT Pinning of Puppet Agent package
-# @param pin_version version to be APT pinned
-# @param pin_priotity priority of pinned Puppet Agent package
 #
 # Examples
 # --------
@@ -26,41 +23,11 @@ class vision_puppet::client (
   String $interval,
   String $log_file,
   String $puppet_server,
-  String $repo_key,
-  String $repo_component,
-  String $repo_key_id,
-  String $role                    = lookup('role', String, 'first', 'default'),
-  Optional[Boolean] $pin          = undef,
-  Optional[String] $pin_version   = undef,
-  Optional[Integer] $pin_priority = undef,
+  String $role = lookup('role', String, 'first', 'default'),
 
   ) {
 
-  apt::source { 'puppetlabs':
-    location => 'https://apt.puppetlabs.com',
-    repos    => $repo_component,
-    key      => {
-      id      => $repo_key_id,
-      content => $repo_key,
-    },
-    include  => {
-      'src' => false,
-      'deb' => true,
-    }
-  }
-
-  if $pin {
-    apt::pin { 'puppet-agent':
-      packages => 'puppet-agent',
-      priority => $pin_priority,
-      version  => $pin_version,
-    }
-  }
-
-  package { 'puppet-agent':
-    ensure  => present,
-    require => Apt::Source['puppetlabs']
-  }
+  contain ::vision_puppet::agent
 
   service { 'puppet':
     ensure     => running,

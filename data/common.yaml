@@ -1,13 +1,15 @@
 ---
 vision_puppet::server::pdb_port: 8081
 vision_puppet::server::pin_priority: 1000
+
 vision_puppet::client::interval: '6h'
 vision_puppet::client::log_file: '/var/log/puppetlabs/puppet/agent.log'
-vision_puppet::client::pin: false
-vision_puppet::client::pin_priority: 1000
-vision_puppet::client::repo_component: 'puppet5'
-vision_puppet::client::repo_key_id: '6F6B15509CF8E59E6E469F327F438280EF8D349F'
-vision_puppet::client::repo_key: |
+
+vision_puppet::agent::pin: false
+vision_puppet::agent::pin_priority: 1000
+vision_puppet::agent::repo_component: 'puppet5'
+vision_puppet::agent::repo_key_id: '6F6B15509CF8E59E6E469F327F438280EF8D349F'
+vision_puppet::agent::repo_key: |
   -----BEGIN PGP PUBLIC KEY BLOCK-----
 
   mQINBFe2Iz4BEADqbv/nWmR26bsivTDOLqrfBEvRu9kSfDMzYh9Bmik1A8Z036Eg
