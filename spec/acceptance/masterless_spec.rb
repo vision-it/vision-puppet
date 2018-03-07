@@ -4,8 +4,6 @@ describe 'vision_puppet::masterless' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-FILE
-        package { 'unzip': ensure => 'present' }
-
         class { 'vision_puppet::masterless':
          puppetdb_server => 'http://localhost:8081/',
         }
