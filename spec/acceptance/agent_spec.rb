@@ -24,6 +24,5 @@ describe 'vision_puppet::agent' do
     describe package('puppet-agent') do
       it { is_expected.to be_installed }
     end
-
   end
 end

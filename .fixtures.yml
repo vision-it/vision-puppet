@@ -5,7 +5,7 @@ fixtures:
           ref: "4.24.0"
           repo: "https://github.com/puppetlabs/puppetlabs-stdlib"
         archive:
-          ref: "v2.2.0"
+          ref: "v2.3.0"
           repo: "https://github.com/voxpupuli/puppet-archive"
         inifile:
           ref: "1.5.0"
