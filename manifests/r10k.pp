@@ -25,11 +25,12 @@ class vision_puppet::r10k(
 
   ) {
 
-  if !defined(Package['unzip']) {
-    package { 'unzip':
-      ensure => present,
-    }
-  }
+  # Temporary cause of duplicate resource with sys
+  # if !defined(Package['unzip']) {
+  #   package { 'unzip':
+  #     ensure => present,
+  #   }
+  # }
 
   file { '/etc/puppetlabs/r10k':
     ensure => 'directory',
@@ -43,8 +44,7 @@ class vision_puppet::r10k(
     extract_path  => '/opt/puppetlabs/bin',
     extract       => true,
     require       => [
-      File['/etc/puppetlabs/r10k'],
-      Package['unzip'],
+      File['/etc/puppetlabs/r10k']
     ],
   }
 
