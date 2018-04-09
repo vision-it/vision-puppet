@@ -1,16 +1,14 @@
 # Warning: This file is managed by puppet; DO NOT EDIT
 # ====================================================
 
-[master]
-vardir = /opt/puppetlabs/server/data/puppetserver
-logdir = /var/log/puppetlabs/puppetserver
-rundir = /var/run/puppetlabs/puppetserver
-pidfile = /var/run/puppetlabs/puppetserver/puppetserver.pid
+[main]
+basemodulepath = /etc/puppetlabs/puppet/modules:/usr/share/puppet/modules
+environmentpath = /etc/puppetlabs/code/environments
+hiera_config = /etc/puppetlabs/puppet/hiera.yaml
+logdir = /var/log/puppetlabs/puppet
+vardir = /opt/puppetlabs/puppet/cache
+rundir = /var/run/puppetlabs
 codedir = /etc/puppetlabs/code
 storeconfigs = true
 storeconfigs_backend = puppetdb
 facts_terminus = puppetdb
-
-[main]
-environmentpath = /etc/puppetlabs/code/environments
-hiera_config = /etc/puppetlabs/puppet/hiera.yaml
