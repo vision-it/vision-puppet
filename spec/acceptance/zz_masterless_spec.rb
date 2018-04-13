@@ -27,7 +27,7 @@ describe 'vision_puppet::masterless' do
 
     describe file('/etc/puppetlabs/puppet/puppetdb.conf') do
       it { is_expected.to be_file }
-      it { is_expected.to contain 'server_urls = http://localhost:8081/' }
+      it { is_expected.to contain 'server_urls = https://example.com:8081/' }
       it { is_expected.to contain 'MANAGED BY PUPPET' }
     end
 
