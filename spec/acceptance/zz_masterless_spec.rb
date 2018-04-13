@@ -11,7 +11,10 @@ describe 'vision_puppet::masterless' do
       FILE
 
       apply_manifest(pp, catch_failures: true)
-      apply_manifest(pp, catch_changes: true)
+      # this manifest can only be applied once for beaker tests
+      # as it changes the puppet configuration and when beaker executes
+      # puppet apply on subsequent runs, it will try to contact the PuppetDB
+      # apply_manifest(pp, catch_changes: true)
     end
   end
 
