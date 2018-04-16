@@ -4,6 +4,9 @@ describe 'vision_puppet::server' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-FILE
+        package { 'unzip':
+          ensure => present,
+        }
         class { 'vision_puppet::server': }
       FILE
 

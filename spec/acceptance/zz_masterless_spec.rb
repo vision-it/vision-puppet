@@ -4,13 +4,17 @@ describe 'vision_puppet::masterless' do
   context 'with defaults' do
     it 'idempotentlies run' do
       pp = <<-FILE
-        class { 'vision_puppet::masterless':
-         puppetdb_server => 'http://localhost:8081/',
+        package { 'unzip':
+          ensure => present,
         }
+        class { 'vision_puppet::masterless': }
       FILE
 
       apply_manifest(pp, catch_failures: true)
-      apply_manifest(pp, catch_changes: true)
+      # this manifest can only be applied once for beaker tests
+      # as it changes the puppet configuration and when beaker executes
+      # puppet apply on subsequent runs, it will try to contact the PuppetDB
+      # apply_manifest(pp, catch_changes: true)
     end
   end
 
@@ -26,7 +30,7 @@ describe 'vision_puppet::masterless' do
 
     describe file('/etc/puppetlabs/puppet/puppetdb.conf') do
       it { is_expected.to be_file }
-      it { is_expected.to contain 'server_urls = http://localhost:8081/' }
+      it { is_expected.to contain 'server_urls = https://example.com:8081/' }
       it { is_expected.to contain 'MANAGED BY PUPPET' }
     end
 
