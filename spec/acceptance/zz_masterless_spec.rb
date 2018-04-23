@@ -24,7 +24,7 @@ describe 'vision_puppet::masterless' do
       it { is_expected.to be_mode 744 }
       it { is_expected.to contain 'storeconfigs = true' }
       it { is_expected.to contain 'storeconfigs_backend = puppetdb' }
-      it { is_expected.to contain 'facts_terminus = puppetdb' }
+      it { is_expected.to contain 'facts_terminus = facter' }
       it { is_expected.to contain 'This file is managed by puppet' }
     end
 
