@@ -64,6 +64,7 @@ class vision_puppet::r10k(
 
   vcsrepo { '/etc/puppetlabs/r10k/postrun':
     ensure   => latest,
+    force    => true,
     provider => git,
     source   => 'https://github.com/vision-it/postrun.git',
     revision => 'master'
