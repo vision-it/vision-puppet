@@ -46,7 +46,7 @@ class vision_puppet::masterless (
     owner   => root,
     group   => root,
     mode    => '0744',
-    content => template('vision_puppet/routes.yaml'),
+    content => template('vision_puppet/routes-masterless.yaml'),
   }
 
 }

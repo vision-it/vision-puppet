@@ -1,0 +1,8 @@
+---
+apply:
+  catalog:
+    terminus: compiler
+    cache: puppetdb
+  facts:
+    terminus: facter
+    cache: puppetdb_apply
