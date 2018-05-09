@@ -9,6 +9,10 @@ logdir = /var/log/puppetlabs/puppet
 vardir = /opt/puppetlabs/puppet/cache
 rundir = /var/run/puppetlabs
 codedir = /etc/puppetlabs/code
+facts_terminus = facter
+<% if defined?(@puppetdb_server) -%>
 storeconfigs = true
 storeconfigs_backend = puppetdb
-facts_terminus = facter
+<% else -%>
+storeconfigs = false
+<% end -%>

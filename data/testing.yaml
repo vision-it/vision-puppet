@@ -16,4 +16,4 @@ vision_puppet::r10k::remote_path_puppet: '/puppet/path/foobar'
 vision_puppet::puppetdb::sql_user: 'foobar'
 vision_puppet::puppetdb::sql_password: 'foobar'
 
-vision_puppet::masterless::puppetdb_server: 'https://example.com:8081/'
+vision_puppet::masterless:puppet_conf_dir: '/data'
