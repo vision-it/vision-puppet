@@ -15,7 +15,6 @@ describe 'vision_puppet::masterless' do
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
-
     end
   end
 
