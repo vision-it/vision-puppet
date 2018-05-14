@@ -7,6 +7,8 @@
 class vision_puppet::masterless (
 
   String $puppet_conf_dir = '/etc/puppetlabs/puppet/',
+  String $interval = '6h',
+  String $log_level = 'notice',
   Optional[String] $puppetdb_server = undef,
 
   ) {
@@ -46,6 +48,29 @@ class vision_puppet::masterless (
     require => File['puppet-conf-dir'],
   }
 
+  # Install systemd timer for puppet apply
+  file { '/etc/systemd/system/apply.service':
+    ensure  => present,
+    content => template('vision_puppet/apply.service.erb'),
+    notify  => Service['apply'],
+  }
+
+  file { '/etc/systemd/system/apply.timer':
+    ensure  => present,
+    content => template('vision_puppet/apply.timer.erb'),
+    notify  => Service['apply'],
+  }
+
+  service { 'apply':
+    ensure   => running,
+    enable   => true,
+    provider => 'systemd',
+    name     => 'apply.timer',
+    require  => [
+      File['/etc/systemd/system/apply.service'],
+      File['/etc/systemd/system/apply.timer'],
+    ],
+  }
 
   if $puppetdb_server != undef {
 

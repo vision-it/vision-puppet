@@ -33,6 +33,7 @@ class vision_puppet::client (
     ensure     => running,
     enable     => true,
     hasrestart => true,
+    provider   => 'systemd',
     require    => Package['puppet-agent'],
   }
 

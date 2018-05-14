@@ -17,3 +17,5 @@ vision_puppet::puppetdb::sql_user: 'foobar'
 vision_puppet::puppetdb::sql_password: 'foobar'
 
 vision_puppet::masterless:puppet_conf_dir: '/data'
+vision_puppet::masterless:interval: '42h'
+vision_puppet::masterless:log_level: 'debug'

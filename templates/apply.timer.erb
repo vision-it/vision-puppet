@@ -1,0 +1,12 @@
+# This file is managed by Puppet
+[Unit]
+Description=Puppet Apply in Masterless mode
+
+[Timer]
+# see man 7 systemd.time for possible formats
+OnUnitActiveSec=<%= @interval %>
+OnStartupSec=300
+RandomizedDelaySec=120
+
+[Install]
+WantedBy=timers.target

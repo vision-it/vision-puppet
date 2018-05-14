@@ -7,8 +7,11 @@ describe 'vision_puppet::masterless' do
         package { 'unzip':
           ensure => present,
         }
+        # puppetdb_server = undef => provision without puppetdb
         class { 'vision_puppet::masterless':
           puppet_conf_dir => '/data',
+          log_level => 'debug',
+          interval => '42h 11m',
         }
       FILE
 
@@ -49,6 +52,32 @@ describe 'vision_puppet::masterless' do
 
     describe package('puppet-agent') do
       it { is_expected.to be_installed }
+    end
+
+    describe file('/etc/systemd/system/apply.service') do
+      it { is_expected.to be_file }
+      it { is_expected.to contain 'This file is managed by Puppet' }
+      it { is_expected.to contain '[Unit]' }
+      it { is_expected.to contain 'Requires=local-fs.target' }
+      it { is_expected.to contain '[Service]' }
+      it { is_expected.to contain 'Type=oneshot' }
+      it { is_expected.to contain 'SuccessExitStatus=0 2' }
+      it { is_expected.to contain 'ExecStart=' }
+      it { is_expected.to contain 'apply' }
+      it { is_expected.to contain '--detailed-exitcodes' }
+      it { is_expected.to contain '--log_level debug' }
+      it { is_expected.to contain '[Install]' }
+      it { is_expected.to contain 'WantedBy=multi-user.target' }
+    end
+
+    describe file('/etc/systemd/system/apply.timer') do
+      it { is_expected.to be_file }
+      it { is_expected.to contain 'This file is managed by Puppet' }
+      it { is_expected.to contain '[Unit]' }
+      it { is_expected.to contain '[Timer]' }
+      it { is_expected.to contain 'OnUnitActiveSec=42h 11m' }
+      it { is_expected.to contain '[Install]' }
+      it { is_expected.to contain 'WantedBy=timers.target' }
     end
 
     describe service('puppet') do
