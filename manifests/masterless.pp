@@ -6,7 +6,8 @@
 
 class vision_puppet::masterless (
 
-  String $puppetdb_server,
+  String $puppet_conf_dir = '/etc/puppetlabs/puppet/',
+  Optional[String] $puppetdb_server = undef,
 
   ) {
 
@@ -14,39 +15,55 @@ class vision_puppet::masterless (
   contain ::vision_puppet::hiera
   contain ::vision_puppet::agent
 
-  package { 'puppetdb-termini':
-    ensure  => present,
-    require => Apt::Source['puppetlabs']
-  }
-
   service { 'puppet':
     ensure  => stopped,
     enable  => false,
     require => Package['puppet-agent'],
   }
 
-  file { '/etc/puppetlabs/puppet/puppet.conf':
+  file { 'puppet-conf-dir':
+    ensure => directory,
+    path   => $puppet_conf_dir,
+  }
+
+  file { 'puppet.conf':
     ensure  => present,
+    path    => "${puppet_conf_dir}/puppet.conf",
     owner   => root,
     group   => root,
     mode    => '0744',
     content => template('vision_puppet/puppet-masterless.conf.erb'),
+    require => File['puppet-conf-dir'],
   }
 
-  file { '/etc/puppetlabs/puppet/puppetdb.conf':
+  file { 'routes.yaml':
     ensure  => present,
+    path    => "${puppet_conf_dir}/routes.yaml",
     owner   => root,
     group   => root,
     mode    => '0744',
-    content => template('vision_puppet/puppetdb-masterless.conf.erb'),
+    content => template('vision_puppet/routes-masterless.yaml.erb'),
+    require => File['puppet-conf-dir'],
   }
 
-  file { '/etc/puppetlabs/puppet/routes.yaml':
-    ensure  => present,
-    owner   => root,
-    group   => root,
-    mode    => '0744',
-    content => template('vision_puppet/routes-masterless.yaml'),
+
+  if $puppetdb_server != undef {
+
+    file { 'puppetdb.conf':
+      ensure  => present,
+      path    => "${puppet_conf_dir}/puppetdb.conf",
+      owner   => root,
+      group   => root,
+      mode    => '0744',
+      content => template('vision_puppet/puppetdb-masterless.conf.erb'),
+      require => File['puppet-conf-dir'],
+    }
+
+    package { 'puppetdb-termini':
+      ensure  => present,
+      require => Apt::Source['puppetlabs']
+    }
+
   }
 
 }

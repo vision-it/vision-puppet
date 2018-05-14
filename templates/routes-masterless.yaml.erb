@@ -1,8 +1,14 @@
 ---
 apply:
+<% if defined?(@puppetdb_server) -%>
   catalog:
     terminus: compiler
     cache: puppetdb
   facts:
     terminus: facter
     cache: puppetdb_apply
+<% else -%>
+  facts:
+    terminus: facter
+    cache: yaml
+<% end -%>
