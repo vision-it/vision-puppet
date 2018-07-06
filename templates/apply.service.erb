@@ -4,6 +4,7 @@ Description=Puppet Apply in Masterless mode
 Documentation=man:puppet(1)
 Documentation=https://puppet.com/docs/puppet/5.5/configuration.html
 Requires=local-fs.target
+Wants=fetch-modules.service
 
 [Service]
 Type=oneshot

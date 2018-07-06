@@ -48,11 +48,18 @@ class vision_puppet::masterless (
     require => File['puppet-conf-dir'],
   }
 
+  # Install service for fetching module updates
+  file { '/etc/systemd/system/fetch-modules.service':
+    ensure  => present,
+    content => template('vision_puppet/fetch-modules.service.erb'),
+  }
+
   # Install systemd timer for puppet apply
   file { '/etc/systemd/system/apply.service':
     ensure  => present,
     content => template('vision_puppet/apply.service.erb'),
     notify  => Service['apply'],
+    require => File['/etc/systemd/system/fetch-modules.service'],
   }
 
   file { '/etc/systemd/system/apply.timer':
