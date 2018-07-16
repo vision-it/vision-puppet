@@ -2,6 +2,10 @@
 [Unit]
 Description=Fetch Updates for Puppet Modules with g10k and Postrun
 Requires=local-fs.target
+ConditionPathIsReadWrite=/etc/puppetlabs/code/environments
+ConditionFileIsExecutable=/usr/local/bin/g10k
+ConditionFileNotEmpty=/etc/puppetlabs/r10k/postrun/postrun.py
+ConditionFileNotEmpty=/etc/puppetlabs/r10k/g10k.yaml
 
 [Service]
 Type=oneshot
