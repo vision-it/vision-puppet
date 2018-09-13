@@ -10,7 +10,7 @@ ConditionFileNotEmpty=/etc/puppetlabs/r10k/g10k.yaml
 [Service]
 Type=oneshot
 # deploy
-ExecStart=/usr/local/bin/g10k -config /etc/puppetlabs/r10k/g10k.yaml
+ExecStart=/usr/local/bin/g10k -quiet -config /etc/puppetlabs/r10k/g10k.yaml
 # postrun
 ExecStart=/usr/bin/python3 /etc/puppetlabs/r10k/postrun/postrun.py
 
