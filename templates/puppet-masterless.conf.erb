@@ -10,6 +10,7 @@ vardir = /opt/puppetlabs/puppet/cache
 rundir = /var/run/puppetlabs
 codedir = /etc/puppetlabs/code
 facts_terminus = facter
+disable_warnings = 'deprecations'
 <% if defined?(@puppetdb_server) -%>
 storeconfigs = true
 storeconfigs_backend = puppetdb
