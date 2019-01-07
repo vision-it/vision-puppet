@@ -23,7 +23,7 @@ class vision_puppet::r10k(
   String $g10k_url      = 'https://github.com/xorpaul/g10k/releases/download/v0.4.4/g10k-linux-amd64.zip',
   String $g10k_checksum = 'e5a2ec0e6da4d2fd579c93cda97b55c922b56f4b888bba6a2f9b174bd28eeb66',
 
-  ) {
+) {
 
   # Temporary cause of duplicate resource with sys
   # if !defined(Package['unzip']) {
@@ -55,19 +55,6 @@ class vision_puppet::r10k(
     mode    => '0644',
     content => template('vision_puppet/r10k.yaml.erb'),
     require => File['/etc/puppetlabs/r10k'],
-  }
-
-  # Python Postrun Script to manage Custom Modules in Vagrant
-  package { 'python3-yaml':
-    ensure => 'present',
-  }
-
-  vcsrepo { '/etc/puppetlabs/r10k/postrun':
-    ensure   => latest,
-    force    => true,
-    provider => git,
-    source   => 'https://github.com/vision-it/postrun.git',
-    revision => 'master'
   }
 
 }

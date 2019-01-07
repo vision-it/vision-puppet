@@ -4,7 +4,6 @@
 # therefore the source is not required.
 
 ---
-postrun: ['/etc/puppetlabs/r10k/postrun/postrun.py']
 puppetfilelocation: '/etc/puppetlabs/code/environments/production/Puppetfile'
 cachedir: /opt/puppetlabs/puppet/cache/r10k
 sources:
@@ -12,9 +11,9 @@ sources:
     basedir: /etc/puppetlabs/code/environments
     prefix: false
     remote: <%= @remote_path_puppet %>
-  <% if @location != "vrt" %>
+<% if @location != "vrt" %>
   hiera:
     basedir: /etc/puppetlabs/code/hieradata
     prefix: false
     remote: <%= @remote_path_hiera %>
-  <%end %>
+<%end %>
