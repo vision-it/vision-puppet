@@ -14,7 +14,7 @@ fixtures:
           ref: "2.2.0"
           repo: "https://github.com/puppetlabs/puppetlabs-vcsrepo"
         apt:
-          ref: "4.2.0"
+          ref: "5.0.1"
           repo: "https://github.com/puppetlabs/puppetlabs-apt"
         # PuppetDB for config
         puppetdb:
