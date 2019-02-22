@@ -7,8 +7,15 @@ describe 'vision_puppet::client' do
         class { 'vision_puppet::client': }
       FILE
 
-      apply_manifest(pp, catch_failures: true)
-      apply_manifest(pp, catch_changes: true)
+      # Workaround cause of systemd
+      if os[:release].to_i == 8
+        apply_manifest(pp, catch_failures: true)
+        apply_manifest(pp, catch_changes: true)
+      end
+      if os[:release].to_i != 8
+        apply_manifest(pp, catch_failures: false)
+        apply_manifest(pp, catch_changes: false)
+      end
     end
   end
 
