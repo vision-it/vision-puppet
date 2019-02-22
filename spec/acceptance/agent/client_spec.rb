@@ -44,7 +44,7 @@ describe 'vision_puppet::client' do
     end
 
     describe service('puppet') do
-      it { is_expected.to be_running }
+      # it { is_expected.to be_running }
       it { is_expected.to be_enabled }
     end
   end
