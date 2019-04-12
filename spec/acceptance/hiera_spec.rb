@@ -23,6 +23,7 @@ describe 'vision_puppet::hiera' do
       it { is_expected.to contain 'datadir' }
       it { is_expected.to contain 'location' }
       it { is_expected.to contain 'role' }
+      it { is_expected.to contain 'os' }
       it { is_expected.to contain 'type' }
       it { is_expected.to contain 'common' }
     end
