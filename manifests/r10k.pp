@@ -23,7 +23,9 @@ class vision_puppet::r10k(
   String $g10k_url      = 'https://github.com/xorpaul/g10k/releases/download/v0.5.8/g10k-linux-amd64.zip',
   String $g10k_checksum = '1fee326742e6c90efb23683cbc0063b7dfbdbe1b5a91a98990036a70d5563a33',
 
-) {
+  ) {
+
+  contain ::vision_puppet::keys
 
   # Temporary cause of duplicate resource with sys
   # if !defined(Package['unzip']) {
