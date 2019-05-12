@@ -2,10 +2,10 @@
 # see ssh_config(5)
 <% @hosts.each do |h| -%>
 Host <%= h["host"] %>
-<% if defined?(h["user"]) -%>
+<% if h.has_key?("user") -%>
   User <%= h["user"] %>
 <% end -%>
-<% if defined?(h["port"]) -%>
+<% if h.has_key?("port") -%>
   Port <%= h["port"] %>
 <% end -%>
   IdentityFile <%= @identityfile %>
