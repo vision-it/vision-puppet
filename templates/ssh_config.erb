@@ -1,0 +1,13 @@
+# This file is managed by Puppet
+# see ssh_config(5)
+<% @hosts.each do |h| -%>
+Host <%= h["host"] %>
+  <% if defined?(h["user"]) -%>
+  User <%= h["user"] %>
+  <% end -%>
+  <% if defined?(h["port"]) -%>
+  Port <%= h["port"] %>
+  <% end -%>
+  IdentityFile <%= @identityfile %>
+  BatchMode yes
+<% end -%>

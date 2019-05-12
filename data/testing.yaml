@@ -19,3 +19,12 @@ vision_puppet::puppetdb::sql_password: 'foobar'
 vision_puppet::masterless:puppet_conf_dir: '/data'
 vision_puppet::masterless:interval: '42h'
 vision_puppet::masterless:log_level: 'debug'
+
+vision_puppet::keys::hosts:
+  - host: 'git.example.com'
+    user: 'foo'
+    port: '2222'
+  - host: 'gitlab.com'
+    user: 'git'
+vision_puppet::keys::public_key: 'my-public-key'
+vision_puppet::keys::private_key: 'my-secret-key'
