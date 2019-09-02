@@ -33,6 +33,14 @@ describe 'vision_puppet::server' do
         apply_manifest(pp, catch_failures: false)
         apply_manifest(pp, catch_changes: false)
       end
+      if os[:release].to_i == 10
+        pp = <<-FILE
+                 class { 'vision_puppet::server':
+                      }
+                FILE
+        apply_manifest(pp, catch_failures: false)
+        apply_manifest(pp, catch_changes: false)
+      end
     end
   end
 
@@ -56,13 +64,6 @@ describe 'vision_puppet::server' do
   end
 
   context 'files provisioned' do
-    describe file('/etc/puppetlabs/puppetserver/services.d/ca.cfg') do
-      it { is_expected.to be_file }
-      it { is_expected.to contain 'This file is managed by puppet' }
-      its(:content) { is_expected.to match 'puppetlabs.services.ca.certificate-authority-disabled-service' }
-      its(:content) { is_expected.to match '# puppetlabs.services.ca.certificate-authority-service' }
-    end
-
     describe file('/etc/apt/preferences.d/puppetserver') do
       it { is_expected.to be_file }
       it { is_expected.to contain 'Package: puppetserver' }
