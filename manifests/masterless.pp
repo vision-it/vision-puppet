@@ -79,6 +79,12 @@ class vision_puppet::masterless (
     ],
   }
 
+  service { 'mcollective':
+    ensure   => stopped,
+    enable   => false,
+    provider => 'systemd',
+  }
+
   if $puppetdb_server != undef {
 
     file { 'puppetdb.conf':
