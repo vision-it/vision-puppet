@@ -7,8 +7,8 @@
 class vision_puppet::masterless (
 
   String $puppet_conf_dir = '/etc/puppetlabs/puppet/',
-  String $interval = '6h',
-  String $log_level = 'notice',
+  String $interval        = '2h',
+  String $log_level       = 'notice',
   Optional[String] $puppetdb_server = undef,
 
   ) {
