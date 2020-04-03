@@ -38,16 +38,6 @@ class vision_puppet::masterless (
     require => File['puppet-conf-dir'],
   }
 
-  file { 'routes.yaml':
-    ensure  => present,
-    path    => "${puppet_conf_dir}/routes.yaml",
-    owner   => root,
-    group   => root,
-    mode    => '0744',
-    content => template('vision_puppet/routes-masterless.yaml.erb'),
-    require => File['puppet-conf-dir'],
-  }
-
   # Install service for fetching module updates
   file { '/etc/systemd/system/fetch-modules.service':
     ensure  => present,
