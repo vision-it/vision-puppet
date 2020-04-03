@@ -41,17 +41,6 @@ describe 'vision_puppet::masterless' do
       it { is_expected.to contain 'MANAGED BY PUPPET' }
     end
 
-    describe file('/data/routes.yaml') do
-      it { is_expected.to be_file }
-      it { is_expected.to contain 'apply:' }
-      it { is_expected.to contain 'terminus: compiler' }
-      it { is_expected.to contain 'cache: puppetdb' }
-      it { is_expected.to contain 'terminus: facter' }
-      it { is_expected.to contain 'cache: puppetdb_apply' }
-
-      it { is_expected.not_to contain 'cache: yaml' }
-    end
-
     describe file('/etc/apt/preferences.d/puppet-agent.pref') do
       it { is_expected.to be_file }
       it { is_expected.to contain 'This file is managed by Puppet. DO NOT EDIT.' }
