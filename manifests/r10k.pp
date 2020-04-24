@@ -3,6 +3,14 @@
 #
 # Profile to manage r10k, but we're using g10k now
 # https://github.com/xorpaul/g10k
+#
+# Parameters
+# ----------
+# @param remote_path_hiera Git Repo URL for Hiera
+# @param remote_path_puppet Git Repo URL for Puppet
+# @param g10k_url Download Path for g10k
+# @param g10k_checksum Checksum for g10k Download
+#
 
 class vision_puppet::r10k(
 

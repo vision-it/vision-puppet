@@ -3,6 +3,15 @@
 #
 # Profile to manage Puppetlabs agent package
 #
+# Parameters
+# ----------
+# @param repo_key Apt Repo Key
+# @param repo_key_id Apt Repo Key ID
+# @param repo_component Apt Repo Name
+# @param pin Pin Puppet Version (bool)
+# @param pin_version Apt Version to pin
+# @param pin_priority Apt Pin Priority
+#
 
 class vision_puppet::agent (
 
@@ -13,7 +22,7 @@ class vision_puppet::agent (
   Optional[String] $pin_version   = undef,
   Optional[Integer] $pin_priority = undef,
 
-  ) {
+) {
 
     apt::source { 'puppetlabs':
     location => 'https://apt.puppetlabs.com',

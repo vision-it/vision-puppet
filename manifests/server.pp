@@ -6,6 +6,11 @@
 #
 # Parameters
 # ----------
+# @param version Apt Version for Puppet Server
+# @param pin_priority Apt Pin priority
+# @param report_days Days to keep reports
+# @param pdb_server PuppetDB Path
+# @param pdb_port PuppetDB Port
 #
 # Examples
 # --------

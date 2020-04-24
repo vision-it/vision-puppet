@@ -3,6 +3,13 @@
 #
 # Profile to manage Puppet masterless clients.
 #
+# Parameters
+# ----------
+# @param puppet_conf_dir Path to Puppet config
+# @param interval Puppet apply interval
+# @param log_level Puppet Log level
+# @param puppetdb_server Name of PuppetDB Server
+#
 
 class vision_puppet::masterless (
 

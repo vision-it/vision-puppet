@@ -25,7 +25,7 @@ class vision_puppet::client (
   String $puppet_server,
   String $role = lookup('role', String, 'first', 'default'),
 
-  ) {
+) {
 
   contain ::vision_puppet::agent
 
