@@ -23,13 +23,6 @@ class vision_puppet::r10k(
 
   contain ::vision_puppet::keys
 
-  # Temporary cause of duplicate resource with sys
-  # if !defined(Package['unzip']) {
-  #   package { 'unzip':
-  #     ensure => present,
-  #   }
-  # }
-
   file { '/etc/puppetlabs/r10k':
     ensure => 'directory',
   }
@@ -53,10 +46,6 @@ class vision_puppet::r10k(
     mode    => '0644',
     content => template('vision_puppet/r10k.yaml.erb'),
     require => File['/etc/puppetlabs/r10k'],
-  }
-
-  file { '/usr/local/bin/g10k':
-    ensure => absent,
   }
 
 }

@@ -7,7 +7,6 @@ describe 'vision_puppet::masterless' do
         package { 'unzip':
           ensure => present,
         }
-        # puppetdb_server = undef => provision without puppetdb
         class { 'vision_puppet::masterless':
           puppet_conf_dir => '/data',
           log_level => 'debug',
@@ -15,15 +14,8 @@ describe 'vision_puppet::masterless' do
         }
       FILE
 
-      # Workaround cause of systemd
-      if os[:release].to_i == 8
-        apply_manifest(pp, catch_failures: true)
-        apply_manifest(pp, catch_changes: true)
-      end
-      if os[:release].to_i != 8
-        apply_manifest(pp, catch_failures: false)
-        apply_manifest(pp, catch_changes: false)
-      end
+      # Systemd not available
+      apply_manifest(pp, catch_failures: false)
     end
   end
 
@@ -78,7 +70,6 @@ describe 'vision_puppet::masterless' do
 
     describe service('puppet') do
       it { is_expected.not_to be_running }
-      # it { is_expected.not_to be_enabled }
     end
   end
 end
