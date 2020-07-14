@@ -8,7 +8,6 @@
 # @param puppet_conf_dir Path to Puppet config
 # @param interval Puppet apply interval
 # @param log_level Puppet Log level
-# @param puppetdb_server Name of PuppetDB Server
 #
 
 class vision_puppet::masterless (
@@ -16,7 +15,6 @@ class vision_puppet::masterless (
   String $puppet_conf_dir = '/etc/puppetlabs/puppet/',
   String $interval        = '2h',
   String $log_level       = 'notice',
-  Optional[String] $puppetdb_server = undef,
 
   ) {
 
@@ -24,6 +22,7 @@ class vision_puppet::masterless (
   contain ::vision_puppet::hiera
   contain ::vision_puppet::agent
 
+  # Puppet is triggered via Timer
   service { 'puppet':
     ensure  => stopped,
     enable  => false,
@@ -76,29 +75,11 @@ class vision_puppet::masterless (
     ],
   }
 
+  # Comes with Puppet, but not in use
   service { 'mcollective':
     ensure   => stopped,
     enable   => false,
     provider => 'systemd',
-  }
-
-  if $puppetdb_server != undef {
-
-    file { 'puppetdb.conf':
-      ensure  => present,
-      path    => "${puppet_conf_dir}/puppetdb.conf",
-      owner   => root,
-      group   => root,
-      mode    => '0744',
-      content => template('vision_puppet/puppetdb-masterless.conf.erb'),
-      require => File['puppet-conf-dir'],
-    }
-
-    package { 'puppetdb-termini':
-      ensure  => present,
-      require => Apt::Source['puppetlabs']
-    }
-
   }
 
 }

@@ -24,7 +24,7 @@ class vision_puppet::agent (
 
 ) {
 
-    apt::source { 'puppetlabs':
+  apt::source { 'puppetlabs':
     location => 'https://apt.puppetlabs.com',
     repos    => $repo_component,
     key      => {

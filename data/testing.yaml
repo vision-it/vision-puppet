@@ -1,20 +1,10 @@
 ---
-vision_puppet::server::version: '2.4.0-1puppetlabs1'
-vision_puppet::server::pin_priority: 999
-vision_puppet::server::location: 'vrt'
-
-vision_puppet::client::puppet_server: 'localhost'
-vision_puppet::client::role: 'beaker'
-
 vision_puppet::agent::pin: true
 vision_puppet::agent::pin_version: '1.2.3-abc'
 vision_puppet::agent::pin_priority: 999
 
 vision_puppet::r10k::remote_path_hiera: '/hiera/path/foobar'
 vision_puppet::r10k::remote_path_puppet: '/puppet/path/foobar'
-
-vision_puppet::puppetdb::sql_user: 'foobar'
-vision_puppet::puppetdb::sql_password: 'foobar'
 
 vision_puppet::masterless:puppet_conf_dir: '/data'
 vision_puppet::masterless:interval: '42h'
