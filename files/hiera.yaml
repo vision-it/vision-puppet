@@ -1,9 +1,7 @@
 # hiera.yaml Managed by Puppet
 version: 5
-
 defaults:
-  datadir: /etc/puppetlabs/code/hieradata/%{::environment}
-
+  datadir: /etc/puppetlabs/code/environments/%{::environment}
 hierarchy:
   - name: "eYaml Hierarchy"
     lookup_key: eyaml_lookup_key
@@ -16,4 +14,3 @@ hierarchy:
     options:
       pkcs7_private_key: "/etc/puppetlabs/puppet/keys/private_key.pkcs7.pem"
       pkcs7_public_key: "/etc/puppetlabs/puppet/keys/public_key.pkcs7.pem"
-
