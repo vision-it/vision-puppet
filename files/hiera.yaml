@@ -11,8 +11,6 @@ hierarchy:
       - "node/%{::clientcert}.yaml"
       - "location/%{::location}.yaml"
       - "role/%{role}.yaml" # Comes from hiera not facter
-      - "type/%{::nodetype}.yaml"
-      - "type/common.yaml"
       - "os/%{facts.os.distro.codename}.yaml"
       - "common.yaml"
     options:
