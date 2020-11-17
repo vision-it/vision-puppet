@@ -8,10 +8,10 @@ hierarchy:
   - name: "eYaml Hierarchy"
     lookup_key: eyaml_lookup_key
     paths:
-      - "node/%{::clientcert}.yaml"
-      - "location/%{::location}.yaml"
-      - "role/%{role}.yaml" # Comes from hiera not facter
-      - "os/%{facts.os.distro.codename}.yaml"
+      - "data/node/%{::clientcert}.yaml"
+      - "data/location/%{::location}.yaml"
+      - "data/role/%{role}.yaml" # Comes from hiera not facter
+      - "data/os/%{facts.os.distro.codename}.yaml"
       - "common.yaml"
     options:
       pkcs7_private_key: "/etc/puppetlabs/puppet/keys/private_key.pkcs7.pem"
