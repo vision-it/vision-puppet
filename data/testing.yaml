@@ -3,7 +3,6 @@ vision_puppet::agent::pin: true
 vision_puppet::agent::pin_version: '1.2.3-abc'
 vision_puppet::agent::pin_priority: 999
 
-vision_puppet::r10k::remote_path_hiera: '/hiera/path/foobar'
 vision_puppet::r10k::remote_path_puppet: '/puppet/path/foobar'
 
 vision_puppet::masterless:puppet_conf_dir: '/data'

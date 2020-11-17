@@ -14,7 +14,6 @@
 
 class vision_puppet::r10k(
 
-  String $remote_path_hiera,
   String $remote_path_puppet,
   String $g10k_url      = 'https://github.com/xorpaul/g10k/releases/download/v0.8.7/g10k-linux-amd64.zip',
   String $g10k_checksum = '7250465ea2d78452a46950ed94a19aa89f218502d17d3c434d6b2af8e06ea399',

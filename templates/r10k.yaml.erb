@@ -1,7 +1,4 @@
-# Warning: This file is managed by puppet; DO NOT EDIT
-# ====================================================
-# In Vagrant (vrt) we use a custom postrun script for Hieradata,
-# therefore the source is not required.
+# This file is managed by puppet; DO NOT EDIT
 
 ---
 puppetfilelocation: '/etc/puppetlabs/code/environments/production/Puppetfile'
@@ -11,9 +8,3 @@ sources:
     basedir: /etc/puppetlabs/code/environments
     prefix: false
     remote: <%= @remote_path_puppet %>
-<% if @location != "vrt" %>
-  hiera:
-    basedir: /etc/puppetlabs/code/hieradata
-    prefix: false
-    remote: <%= @remote_path_hiera %>
-<%end %>

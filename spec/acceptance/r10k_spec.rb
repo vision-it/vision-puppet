@@ -20,7 +20,6 @@ describe 'vision_puppet::r10k' do
       it { is_expected.to be_mode 644 }
       its(:content) { is_expected.to match 'This file is managed by puppet' }
       its(:content) { is_expected.to match '/puppet/path/foobar' }
-      its(:content) { is_expected.to match '/hiera/path/foobar' }
       its(:content) { is_expected.to match 'puppetfilelocation' }
     end
 
