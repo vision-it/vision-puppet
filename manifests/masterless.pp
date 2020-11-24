@@ -14,7 +14,7 @@ class vision_puppet::masterless (
 
   String $puppet_conf_dir = '/etc/puppetlabs/puppet/',
   String $interval        = '2h',
-  String $log_level       = 'notice',
+  String $log_level       = 'err',
 
   ) {
 
